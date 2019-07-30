@@ -1,0 +1,66 @@
+<div formGroupName="{{groupName}}">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="" i18n>Vorname *</label>
+        <input type="text" class="form-control" formControlName="firstname">
+        <fwas-field-error-display [field]="f['firstname']" [label]="'Vorname'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="" i18n>Nachname *</label>
+        <input type="text" class="form-control" formControlName="lastname">
+        <fwas-field-error-display [field]="f['lastname']" [label]="'Nachname'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="" i18n>Strasse *</label>
+        <input type="text" class="form-control" formControlName="street">
+        <fwas-field-error-display [field]="f['street']" [label]="'Strasse'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="" i18n>Hausnummer *</label>
+        <input type="text" class="form-control" formControlName="houseNr">
+        <fwas-field-error-display [field]="f['houseNr']" [label]="'Hausnummer'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="" i18n>PLZ *</label>
+        <input type="text" class="form-control" formControlName="zip">
+        <fwas-field-error-display [field]="f['zip']" [label]="'PLZ'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="" i18n>Ort *</label>
+        <input type="text" class="form-control" formControlName="city">
+        <fwas-field-error-display [field]="f['city']" [label]="'Ort'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="" i18n>Telefonnummer *</label>
+        <input type="text" class="form-control" formControlName="phone">
+        <fwas-field-error-display [field]="f['phone']" [label]="'Telefonnummer'" [trigger]="validationTrigger"
+          [message]="'ist ungültig'"></fwas-field-error-display>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="" i18n>Emailadresse *</label>
+        <input type="text" class="form-control" formControlName="email">
+        <fwas-field-error-display [field]="f['email']" [label]="'Emailadresse'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+  </div>

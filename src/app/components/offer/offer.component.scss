@@ -1,0 +1,30 @@
+@import './src/styles';
+.offer {
+    .offer-side {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        .offer-category {
+            font-style: italic;
+            margin: 0;
+            text-align: left;
+            padding-right: $spacing;
+            @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+                /* IE10+ CSS styles go here */
+                max-width: 5rem;
+            }
+        }
+        @media (min-width: 768px) {
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            .offer-category {
+                text-align: right;
+                font-size: 12px;
+                padding-right: 0;
+            }
+        }
+    }
+}

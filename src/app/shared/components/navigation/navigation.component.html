@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg fixed-top justify-content-between">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <img src="../assets/logo.png" width="30" height="30" class="d-inline-block align-top">
+    </a>
+    <!-- <div class="navbar-text" *ngIf="!isProd">
+      {{username}}
+    </div>
+    <div class="navbar-text" *ngIf="!isProd">
+      <a href="{{apiurl}}" target="_blank">{{apiurl}}</a>
+    </div> -->
+    <button class="navbar-toggler" type="button" (click)="invertCollapsation()" [attr.aria-expanded]="!collapsed"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngbCollapse]="collapsed">
+      <ul class="navbar-nav">
+        <li class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/start">Start</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/organisationen">Organisationen</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/angebote">Angebote</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/inserate">Inserate</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/dokumente">Dokumente</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/impressum">Impressum</a>
+        </li>
+        <li *ngIf="showOrganisation" class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/manage/organisationen/{{organisation?.id}}">{{organisation?.name}}</a>
+        </li>
+        <li *ngIf="showAdministration" class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/admin">Administration</a>
+        </li>
+        <li *ngIf="!isAuthenticated" class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="/login">Anmelden</a>
+        </li>
+        <li *ngIf="isAuthenticated" class="nav-item" routerLinkActive="active" (click)="invertCollapsation()">
+          <a class="nav-link" routerLink="#" (click)="logout()">Abmelden</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

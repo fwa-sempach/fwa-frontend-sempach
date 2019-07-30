@@ -1,0 +1,115 @@
+<fwas-page-not-found *ngIf="notFound"></fwas-page-not-found>
+<fwas-page-not-working *ngIf="isError && !notFound"></fwas-page-not-working>
+
+<div [hidden]="isError">
+  <h1>{{organisation?.name}}</h1>
+
+  <fwas-organisation-header [organisation]="organisation"></fwas-organisation-header>
+
+  <ngb-tabset>
+    <ngb-tab title="Informationen">
+      <ng-template ngbTabContent>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="grid-element">
+              <div class="element-content">
+                <h2 class="element-title">Informationen</h2>
+                <div class="text-pair">
+                  <div class="strong">
+                    Name der Organisation
+                  </div>
+                  <div>
+                    {{organisation?.name}}
+                  </div>
+                </div>
+                <div class="text-pair">
+                  <div class="strong">
+                    Veranwortliche Person
+                  </div>
+                  <div>
+                    {{organisation?.contactPerson.firstname}} {{organisation?.contactPerson.lastname}}
+                  </div>
+                </div>
+                <div class="text-pair">
+                  <div class="strong">
+                    Telefonnummer
+                  </div>
+                  <div>
+                    {{organisation?.contactPerson.phone}}
+                  </div>
+                </div>
+                <div class="text-pair">
+                  <div class="strong">
+                    Emailadresse
+                  </div>
+                  <div>
+                    {{organisation?.contactPerson.email}}
+                  </div>
+                </div>
+                <div class="text-pair">
+                  <div class="strong">
+                    Adresse
+                  </div>
+                  <div>
+                    {{organisation?.contactPerson.street}} {{organisation?.contactPerson.houseNr}}
+                  </div>
+                </div>
+                <div class="text-pair">
+                  <div class="strong">
+                    PLZ
+                  </div>
+                  <div>
+                    {{organisation?.contactPerson.zip}}
+                  </div>
+                </div>
+                <div class="text-pair">
+                  <div class="strong">
+                    Ort
+                  </div>
+                  <div>
+                    {{organisation?.contactPerson.city}}
+                  </div>
+                </div>
+                <div class="text-pair">
+                  <div class="strong">
+                    Webseite
+                  </div>
+                  <div>
+                    <a href="{{organisation?.websiteUrl}}" target="_blank">{{organisation?.websiteUrl}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="grid-element">
+              <div class="element-content">
+                <h2 class="element-title">Über uns</h2>
+                <div class="text-pair">
+                  <div class="strong">
+                    Engagement
+                  </div>
+                  <div>
+                    <p [innerHTML]="organisation?.description"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="Angebote">
+      <ng-template ngbTabContent>
+        <fwas-offer [organisationId]="organisation?.id"></fwas-offer>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="Inserate">
+      <ng-template ngbTabContent>
+        <fwas-ad [organisationId]="organisation?.id"></fwas-ad>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

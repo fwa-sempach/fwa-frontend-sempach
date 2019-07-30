@@ -1,0 +1,8 @@
+@import './src/styles';
+.element-content {
+    column-count: 2;
+    column-gap: $h-spacing;
+    h2 {
+        column-span: all;
+    }
+}

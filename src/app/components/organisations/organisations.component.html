@@ -1,0 +1,39 @@
+<fwas-page-not-working *ngIf="isError"></fwas-page-not-working>
+
+<div [hidden]="isError">
+  <h1>Organisationen</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <!-- <div *ngIf="organisations?.length === 0" class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Es gibt keine Organisationen.</h2>
+        </div>
+      </div> -->
+
+      <div *ngFor="let organisation of organisations" class="grid-element offer">
+        <div class="element-side left">
+          <div class="element-side-image contain" [ngStyle]="{ 'background-image': 'url(' + organisation.image.imageUrl + ')'}"></div>
+        </div>
+        <div class="element-content">
+          <h2 class="element-title">{{organisation.name}}</h2>
+          <p [innerHtml]="organisation.description"></p>
+        </div>
+        <div class="element-side right padding offer-side">
+          <a routerLink="/organisationen/{{organisation.id}}" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+      <div class="buttons" *ngIf="organisations?.length > 0">
+        <div class="buttons-left">
+          <button type="button" class="btn btn-secondary" [disabled]="page === 1" (click)="previousPage()">Vorherige
+            Seite</button>
+        </div>
+        <span>Seite {{page}} von {{totalPages}}</span>
+        <div class="buttons-right">
+          <button type="button" class="btn btn-secondary" [disabled]="page === totalPages" (click)="nextPage()">Nächste
+            Seite</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<fwas-page-not-working *ngIf="isError"></fwas-page-not-working>
+
+<div [hidden]="isError">
+  <h1 [hidden]="isSingleOrganisation">Angebote</h1>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="filter grid-element">
+        <div class="element-content loading-wrapper">
+          <h2 class="element-title">Filter</h2>
+          <form [formGroup]="filterForm">
+            <div class="form-group" formArrayName="categories">
+              <label>Kategorie</label>
+              <div *ngFor="let category of categoryFormArray.controls; let i=index" [formGroupName]="i" class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" formControlName="selected">
+                  {{category.value.category.name}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group" [hidden]="isSingleOrganisation">
+              <label>Organisation</label>
+              <ng-select [items]="organisations" bindLabel="name" bindValue="id" formControlName="organisations"></ng-select>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div *ngIf="offers?.length === 0" class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Es gibt keine Angebote, die mit den gewählten Kriterien übereinstimmen...</h2>
+        </div>
+      </div>
+      <div *ngFor="let offer of offers" class="grid-element offer">
+        <div class="element-side left">
+          <div class="element-side-image" [ngStyle]="{ 'background-image': 'url(' + offer.image.imageUrl + ')'}"></div>
+        </div>
+        <div class="element-content">
+          <h2 class="element-title">{{offer.title}}</h2>
+          <p class="element-sub-title">{{offer.organisation.name}}</p>
+          <p [innerHtml]="offer.description"></p>
+        </div>
+        <div class="element-side right padding offer-side">
+          <p class="offer-category">{{offer.category.name}}</p>
+          <a routerLink="/angebote/{{offer.id}}" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+      <div class="buttons" *ngIf="offers?.length > 0">
+        <div class="buttons-left">
+          <button type="button" class="btn btn-secondary" [disabled]="page === 1" (click)="previousPage()">Vorherige
+            Seite</button>
+        </div>
+        <span>Seite {{page}} von {{totalPages}}</span>
+        <div class="buttons-right">
+          <button type="button" class="btn btn-secondary" [disabled]="page === totalPages" (click)="nextPage()">Nächste
+            Seite</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<h1>Registrieren</h1>
+<form [hidden]="registrationSuccessful" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="grid-element">
+    <div class="element-content">
+      <h2 class="content-title">Registrieren</h2>
+
+      <div class="form-group">
+        <label>Benutzername *</label>
+        <input class="form-control" formControlName="username">
+        <fwas-field-error-display [field]="f['username']" [label]="'Benutzername'" [trigger]="validationTrigger"
+          [message]="'darf nur Buchstaben, Zahlen, ., - und _ enthalten'"></fwas-field-error-display>
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input class="form-control" formControlName="email">
+        <fwas-field-error-display [field]="f['email']" [label]="'Email'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+      <div class="form-group">
+        <label>Passwort *</label>
+        <input type="password" class="form-control" formControlName="password">
+        <fwas-field-error-display [field]="f['password']" [label]="'Passwort'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+
+      <div class="form-group">
+        <label for="">Passwort wiederholen *</label>
+        <input type="password" class="form-control" formControlName="passwordRepeat">
+        <fwas-field-error-display [field]="f['passwordRepeat']" [label]="'Passwort wiederholen'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+      <div class="form-group">
+        <ngx-recaptcha2 [siteKey]="siteKey" [size]="size" [hl]="lang" [theme]="theme" [type]="type" (expire)="handleExpire()"
+          (load)="handleLoad()" (success)="handleSuccess($event)" formControlName="recaptcha">
+        </ngx-recaptcha2>
+        <fwas-field-error-display [field]="f['recaptcha']" [label]="'Sicherheitsüberprüfung'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-buttons">
+    <div class="container">
+      <div class="buttons">
+        <div class="buttons-left"></div>
+        <div class="buttons-right">
+          <button type="submit" class="btn btn-primary" [disabled]="submitted">Registrieren</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div [hidden]="registrationSuccessful" class="row">
+  <div class="col-lg-6">
+    <div class="grid-element">
+      <div class="element-content">
+        <h2 class="content-title">Anmelden</h2>
+        <p>
+          <a routerLink="/login">Haben Sie bereits ein Konto. Klicken sie hier, um sich anzumelden.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="registrationSuccessful">
+  <div class="grid-element">
+    <div class="element-content">
+      <h2 class="element-title">Registrierung erfolgreich</h2>
+      <p>
+        Bevor Sie sich einloggen können, müssen Sie Ihre Emailadresse bestätigen. Ein Bestätigungsemail wurden an
+        {{email}} gesendet.
+      </p>
+    </div>
+  </div>
+</div>

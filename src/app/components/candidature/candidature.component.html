@@ -1,0 +1,92 @@
+<div class="grid-element">
+  <div class="element-content">
+    <h2 class="element-title">Melden</h2>
+
+    <div>
+      <form [formGroup]="candidatureForm">
+        <div class="row">
+          <div class="col-lg-6">
+            <fwas-manage-person
+              [groupName]="'person'"
+              [validationTrigger]="validationTrigger"
+            ></fwas-manage-person>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="" i18n>Fähigkeiten *</label>
+              <ng-select
+                [items]="skillItems"
+                [addTag]="true"
+                bindLabel="description"
+                notFoundText="Bitten listen Sie Ihre Fähikgeiten stichwortartig auf"
+                multiple="true"
+                hideSelected="true"
+                formControlName="skills"
+              ></ng-select>
+              <fwas-field-error-display
+                [field]="f['skills']"
+                [label]="'Fähigkeiten'"
+                [trigger]="validationTrigger"
+              ></fwas-field-error-display>
+            </div>
+            <div class="form-group">
+              <label for="" i18n>Bemerkung</label>
+              <textarea
+                class="form-control"
+                formControlName="annotation"
+              ></textarea>
+              <fwas-field-error-display
+                [field]="f['annotation']"
+                [label]="'Bemerkung'"
+                [trigger]="validationTrigger"
+              ></fwas-field-error-display>
+            </div>
+            <div class="form-group">
+              <ngx-recaptcha2
+                [siteKey]="siteKey"
+                [size]="size"
+                [hl]="lang"
+                [theme]="theme"
+                [type]="type"
+                (expire)="handleExpire()"
+                (load)="handleLoad()"
+                (success)="handleSuccess($event)"
+                formControlName="recaptcha"
+              >
+              </ngx-recaptcha2>
+              <fwas-field-error-display
+                [field]="f['recaptcha']"
+                [label]="'Sicherheitsüberprüfung'"
+                [trigger]="validationTrigger"
+              ></fwas-field-error-display>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{{ candidatureForm.value | json }}
+
+<div class="grid-buttons">
+  <div class="container">
+    <div class="buttons">
+      <div class="buttons-left">
+        <a routerLink="/inserate" class="btn btn-secondary"
+          >Zurück zur Übersicht</a
+        >
+      </div>
+      <div class="buttons-right">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="sendCandidature()"
+          [disabled]="submitted"
+        >
+          Melden
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="grid-element">
+  <div class="element-content">
+    <h2 class="content-title">
+      Person
+      <span *ngIf="!participant?.id">hinzufügen</span>
+      <span *ngIf="participant?.id">bearbeiten</span>
+    </h2>
+
+    <div>
+      <form [formGroup]="participantForm">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Gehört zu Inserat</label>
+              <ng-select [items]="ads" bindLabel="title" bindValue="id" notFoundText="-- bitte wählen --"
+                formControlName="adId"></ng-select>
+              <fwas-field-error-display [field]="f['adId']" [label]="'Gehört zu Inserat'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+            <div class="form-group">
+              <label>Status *</label>
+              <ng-select [items]="status" bindLabel="label" bindValue="value" notFoundText="-- bitte wählen --"
+                formControlName="status"></ng-select>
+              <fwas-field-error-display [field]="f['status']" [label]="'Status'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+            <fwas-manage-person [person]="participant?.person" [groupName]="'person'" [validationTrigger]="validationTrigger"></fwas-manage-person>
+
+            <div class="form-group">
+              <label for="" i18n>Fähigkeiten *</label>
+              <ng-select [items]="skillItems" bindLabel="description" [addTag]="true" notFoundText="stichwortartige Fähikgeiten"
+                multiple="true" hideSelected="true" formControlName="skills"></ng-select>
+              <fwas-field-error-display [field]="f['skills']" [label]="'Fähigkeiten'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+            <div class="form-group">
+              <label>Bemerkung</label>
+              <textarea class="form-control" formControlName="annotation"></textarea>
+              <fwas-field-error-display [field]="f['annotation']" [label]="'Beschreibung'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+          </div>
+          <div class="col-lg-6">
+            <fwas-file-upload [image]="participant?.image" [groupName]="'image'"></fwas-file-upload>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="grid-buttons">
+  <div class="container">
+    <div class="buttons">
+      <div class="buttons-left">
+        <div class="btn btn-secondary" (click)="cancel()">Abbrechen</div>
+      </div>
+      <button *ngIf="participant?.id" class="btn btn-secondary" (click)="delete()" [disabled]="deleted">
+        <span *ngIf="!sureDelete">Löschen</span>
+        <span *ngIf="sureDelete">Sicher?</span>
+      </button>
+      <div class="buttons-right">
+        <button class="btn btn-primary" (click)="save()" [disabled]="submitted">Speichern</button>
+      </div>
+    </div>
+  </div>
+</div>

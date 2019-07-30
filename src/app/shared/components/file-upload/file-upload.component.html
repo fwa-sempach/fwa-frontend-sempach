@@ -1,0 +1,8 @@
+<div formGroupName="{{groupName}}">
+  <div class="form-group">
+    <label>Bild<span *ngIf="mandatory"> *</span></label>
+    <img *ngIf="image && image.data" src="{{image.data}}" />
+    <img [hidden]="image && image.data" src="{{image.imageUrl}}" />
+    <input type="file" (change)="handleFileInput($event.target.files)">
+  </div>
+</div>

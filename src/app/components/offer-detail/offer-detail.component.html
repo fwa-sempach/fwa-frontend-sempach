@@ -1,0 +1,40 @@
+<fwas-page-not-found *ngIf="notFound"></fwas-page-not-found>
+<fwas-page-not-working *ngIf="isError && !notFound"></fwas-page-not-working>
+
+<div [hidden]="isError">
+  <div class="banner" [ngStyle]="{ 'background-image': 'url(' + offer?.image.imageUrl + ')'}"></div>
+
+  <h1>{{offer?.title}}</h1>
+
+  <fwas-organisation-header [organisation]="organisation"></fwas-organisation-header>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Unser Ziel</h2>
+          <p [innerHTML]="offer?.organisation.description"></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Unser Angebot</h2>
+          <p [innerHTML]="offer?.description"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-buttons">
+    <div class="container">
+      <div class="buttons">
+        <div class="buttons-left">
+          <a routerLink="/angebote" class="btn btn-primary">Zurück zur Übersicht</a>
+        </div>
+        <div class="buttons-right"></div>
+      </div>
+    </div>
+  </div>
+</div>

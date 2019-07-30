@@ -1,0 +1,81 @@
+<fwas-page-not-found *ngIf="notFound"></fwas-page-not-found>
+<fwas-page-not-working *ngIf="isError && !notFound"></fwas-page-not-working>
+
+<div [hidden]="isError">
+  <div class="banner" [ngStyle]="{ 'background-image': 'url(' + ad?.image.imageUrl + ')'}"></div>
+
+  <h1>{{ad?.title}}</h1>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <fwas-organisation-header [organisation]="organisation"></fwas-organisation-header>
+
+      <div class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Unser Ziel</h2>
+          <p [innerHTML]="ad?.offer.description"></p>
+        </div>
+      </div>
+      <div class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Ihre Aufgabe</h2>
+          <ul>
+            <li *ngFor="let task of ad?.tasks">
+              {{task.description}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Rahmenbedingungen</h2>
+          <ul>
+            <li *ngFor="let basicCondition of ad?.basicConditions">
+              {{basicCondition.description}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Veröffentlichung</h2>
+          <p>Dieses Inserat wurde am {{ad?.releaseDate | date:'mediumDate'}} veröffentlicht.</p>
+        </div>
+      </div>
+      <div class="grid-element">
+        <div class="element-content">
+          <h2 class="element-title">Gesuchte Freiwillige</h2>
+          <p>Wir sind auf der Suche nach {{ad?.numberOfVolunteersNeeded}} Freiwillige(n).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1 *ngIf="isFormVisible || showThankYou">Melden</h1>
+  <fwas-candidature [ad]="ad" [hidden]="!isFormVisible" (formSubmitted)="hideForm($event)"></fwas-candidature>
+
+  <div *ngIf="showThankYou" class="grid-element">
+    <div class="element-content">
+      <h2 class="element-title">Danke!</h2>
+      <p>
+        Vielen Dank für Ihre Bewerbung. Die Organisation wird sich zeitnah bei Ihnen melden. Ein Bestätigungsmail
+        wurde an Ihre Emailadresse gesendet.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid-buttons" [hidden]="isFormVisible">
+    <div class="container">
+      <div class="buttons">
+        <div class="buttons-left">
+          <a routerLink="/inserate" class="btn btn-secondary">Zurück zur Übersicht</a>
+        </div>
+        <div class="buttons-right">
+          <button [hidden]="showThankYou" type="button" class="btn btn-primary" (click)="showForm()">Melden</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

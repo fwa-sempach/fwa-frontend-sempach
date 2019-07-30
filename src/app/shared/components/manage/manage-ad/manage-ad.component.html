@@ -1,0 +1,100 @@
+<div class="grid-element">
+  <div class="element-content">
+    <h2 class="content-title">
+      Inserat
+      <span *ngIf="!ad?.id">hinzufügen</span>
+      <span *ngIf="ad?.id">bearbeiten</span>
+    </h2>
+    <div>
+      <form [formGroup]="adForm">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Gehört zu Angebot *</label>
+              <ng-select [items]="offers" bindLabel="title" notFoundText="-- bitte wählen --" formControlName="offer"></ng-select>
+              <fwas-field-error-display [field]="f['offer']" [label]="'Gehört zu Angebot'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+            <div class="form-group">
+              <label>Titel *</label>
+              <input type="text" class="form-control" formControlName="title">
+              <fwas-field-error-display [field]="f['title']" [label]="'Titel'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+            <div class="form-group">
+              <label>Anzahl gesuchter Frewilliger *</label>
+              <input type="text" class="form-control" formControlName="numberOfVolunteersNeeded">
+              <fwas-field-error-display [field]="f['numberOfVolunteersNeeded']" [label]="'Anzahl gesuchter Frewilliger'"
+                [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+            <div class="form-group">
+              <label>Veröffentlichungsdatum *</label>
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="releaseDate" ngbDatepicker #d1="ngbDatepicker"
+                  (focus)="d1.open()">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" type="button" (click)="d1.toggle()">
+                    <fa-icon [icon]="['fal', 'calendar-alt']"></fa-icon>
+                  </button>
+                </div>
+              </div>
+              <fwas-field-error-display [field]="f['releaseDate']" [label]="'Veröffentlichungsdatum'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+            <div class="form-group">
+              <label>Gültig bis *</label>
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="validUntil" ngbDatepicker #d2="ngbDatepicker"
+                  (focus)="d2.open()">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" type="button" (click)="d2.toggle()">
+                    <fa-icon [icon]="['fal', 'calendar-alt']"></fa-icon>
+                  </button>
+                </div>
+              </div>
+              <fwas-field-error-display [field]="f['validUntil']" [label]="'Gültig bis *'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+            <div class="form-group">
+              <label>Aktiv</label>
+              <input type="checkbox" class="form-control" formControlName="active">
+            </div>
+
+            <div class="form-group">
+              <label>Aufgaben *</label>
+              <ng-select [items]="ad?.tasks" bindLabel="description" [addTag]="true" notFoundText="" multiple="true"
+                hideSelected="true" formControlName="tasks"></ng-select>
+              <fwas-field-error-display [field]="f['tasks']" [label]="'Aufgaben'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+            <div class="form-group">
+              <label>Rahmenbedingungen *</label>
+              <ng-select [items]="ad?.basicConditions" bindLabel="description" [addTag]="true" notFoundText="" multiple="true"
+                hideSelected="true" formControlName="basicConditions"></ng-select>
+              <fwas-field-error-display [field]="f['basicConditions']" [label]="'Rahmenbedingungen'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <fwas-file-upload [image]="ad?.image" [groupName]="'image'"></fwas-file-upload>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="grid-buttons">
+  <div class="container">
+    <div class="buttons">
+      <div class="buttons-left">
+        <div class="btn btn-secondary" (click)="cancel()">Abbrechen</div>
+      </div>
+      <button *ngIf="ad?.id" class="btn btn-secondary" (click)="delete()" [disabled]="deleted">
+        <span *ngIf="!sureDelete">Löschen</span>
+        <span *ngIf="sureDelete">Sicher?</span>
+      </button>
+      <div class="buttons-right">
+        <button class="btn btn-primary" (click)="save()" [disabled]="submitted">Speichern</button>
+      </div>
+    </div>
+  </div>
+</div>

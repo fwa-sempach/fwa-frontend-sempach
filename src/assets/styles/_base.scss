@@ -1,0 +1,142 @@
+body {
+    overflow-y: scroll;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: $font-family-headings;
+}
+
+h1 {
+    margin: $spacing 0 $spacing * 2 0 !important;
+    padding-left: $h-spacing;
+    border-left: 3px dotted $red-light;
+}
+
+h2 {
+    margin-bottom: $spacing !important;
+    padding-left: $h-spacing;
+    border-left: 3px dotted $red-light;
+}
+
+p {
+    text-align: justify;
+}
+
+p,
+ul {
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: square outside;
+    margin-left: 0.75rem;
+}
+
+.strong {
+    font-weight: 700;
+}
+
+.text-pair {
+    margin-bottom: $spacing;
+}
+
+.outer-content {
+    margin-top: $navbar-height;
+    margin-bottom: $grid-buttons-height;
+    min-height: calc(100vh - #{$navbar-height});
+    @media (min-width: 992px) {
+        margin-bottom: 0;
+    }
+    &>.container {
+        background: $outer-content-background;
+        min-height: calc(100vh - #{$navbar-height});
+        .inner-content {
+            min-height: calc(100vh - #{$navbar-height});
+            padding-top: $inner-content-padding;
+            position: relative;
+            @media (min-width: 768px) {
+                padding: 0 $inner-content-padding;
+                padding-top: $inner-content-padding;
+            }
+        }
+    }
+}
+
+.banner {
+    height: 8rem;
+    background-position: center;
+    background-size: cover;
+    margin: -$spacing + 0.0625rem;
+    margin-bottom: $spacing;
+    @media (min-width: 576px) {
+        height: 12rem;
+    }
+    @media (min-width: 768px) {
+        height: 16rem;
+        margin: -$spacing * 2 + 0.0625rem;
+        margin-top: -1rem;
+        margin-bottom: $spacing * 2;
+    }
+}
+
+.loading-wrapper {
+    position: relative;
+}
+
+/*
+.banner_old {
+    height: 8rem;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    margin: -$spacing + 0.0625rem;
+    margin-bottom: $spacing;
+    @media (min-width: 568px) {
+        height: 11.5rem;
+    }
+    @media (min-width: 768px) {
+        height: 20.7rem;
+        margin: -$spacing * 2+0.0625rem;
+        margin-top: -1rem;
+    }
+    @media (min-width: 992px) {
+        height: 27.8rem;
+    }
+    @media (min-width: 1200px) {
+        height: 34.1rem;
+    }
+    .video-cover {
+        position: absolute;
+        width: 100%;
+    }
+    .logo {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        img {
+            margin-top: 2rem;
+            height: 144px * 0.7;
+            @media (min-width: 568px) {
+                margin-top: 4rem;
+            }
+            @media (min-width: 768px) {
+                margin-top: 4rem;
+                height: 144px * 0.8;
+            }
+            @media(min-width: 992px) {
+                margin-top: 2rem;
+            }
+            @media (min-width: 1200px) {
+                height: 144px;
+            }
+        }
+    }
+}
+*/

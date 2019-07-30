@@ -1,0 +1,70 @@
+<div class="grid-element">
+  <div class="element-content">
+    <h2 class="content-title">
+      Angebot
+      <span *ngIf="!offer?.id">hinzufügen</span>
+      <span *ngIf="offer?.id">bearbeiten</span>
+    </h2>
+
+    <div>
+      <form [formGroup]="offerForm">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Titel *</label>
+              <input type="text" class="form-control" formControlName="title">
+              <fwas-field-error-display [field]="f['title']" [label]="'Titel'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+            <div class="form-group">
+              <label>Beschreibung *</label>
+              <quill-editor [formControl]="f['description']" [modules]="quillOptions" [placeholder]="'Fügen Sie eine Beschreibung hinzu...'"
+                [required]="true"></quill-editor>
+              <fwas-field-error-display [field]="f['description']" [label]="'Beschreibung'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+            <div class="form-group" formGroupName="category">
+              <label>Kategorie *</label>
+              <ng-select [items]="categories" bindLabel="name" bindValue="id" formControlName="id" [searchable]="false"
+                [clearable]="false"></ng-select>
+              <fwas-field-error-display [field]="f['category']['controls']['id']" [label]="'Kategorie'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+            <div class="form-group">
+              <label>Aktiv</label>
+              <input type="checkbox" class="form-control" formControlName="active">
+            </div>
+            <fwas-manage-person [person]="offer?.contactPerson" [groupName]="'contactPerson'" [validationTrigger]="validationTrigger"></fwas-manage-person>
+            <!--
+            <div class="buttons">
+              <div class="buttons-left"></div>
+              <div class="buttons-right">
+                <div class="btn btn-secondary" (click)="copyPersonFromOrgToOffer()">Kontakt
+                  von Organisation übernehmen</div>
+              </div>
+            </div>
+            -->
+
+          </div>
+          <div class="col-lg-6">
+            <fwas-file-upload [image]="offer?.image" [groupName]="'image'"></fwas-file-upload>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="grid-buttons">
+  <div class="container">
+    <div class="buttons">
+      <div class="buttons-left">
+        <div class="btn btn-secondary" (click)="cancel()">Abbrechen</div>
+      </div>
+      <button *ngIf="offer?.id" class="btn btn-secondary" (click)="delete()" [disabled]="deleted">
+        <span *ngIf="!sureDelete">Löschen</span>
+        <span *ngIf="sureDelete">Sicher?</span>
+      </button>
+      <div class="buttons-right">
+        <button class="btn btn-primary" (click)="save()" [disabled]="submitted">Speichern</button>
+      </div>
+    </div>
+  </div>
+</div>

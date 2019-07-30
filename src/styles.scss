@@ -1,0 +1,9 @@
+@import 'assets/styles/vars';
+@import 'assets/styles/base';
+@import 'assets/styles/elements';
+@import '~bootstrap/scss/bootstrap.scss';
+@import 'assets/styles/bootstrap-overrides';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import 'assets/styles/ng-select';
+@import 'assets/styles/ngx-datatable';
+@import '~ngx-toastr/toastr-bs4-alert';

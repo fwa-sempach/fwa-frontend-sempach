@@ -1,0 +1,87 @@
+<h1>Anmelden</h1>
+<form [hidden]="isAuth" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="grid-element">
+    <div class="element-content">
+      <h2 class="content-title">Anmelden</h2>
+
+      <div class="form-group">
+        <label>Benutzername *</label>
+        <input class="form-control" formControlName="username">
+        <fwas-field-error-display [field]="f['username']" [label]="'Benutzername'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+      <div class="form-group">
+        <label>Passwort *</label>
+        <input type="password" class="form-control" formControlName="password">
+        <fwas-field-error-display [field]="f['password']" [label]="'Passwort'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+      <div class="form-group">
+        <ngx-recaptcha2 [siteKey]="siteKey" [size]="size" [hl]="lang" [theme]="theme" [type]="type" (expire)="handleExpire()"
+          (load)="handleLoad()" (success)="handleSuccess($event)" formControlName="recaptcha">
+        </ngx-recaptcha2>
+        <fwas-field-error-display [field]="f['recaptcha']" [label]="'Sicherheitsüberprüfung'" [trigger]="validationTrigger"></fwas-field-error-display>
+      </div>
+    </div>
+  </div>
+  <div class="grid-buttons">
+    <div class="container">
+      <div class="buttons">
+        <div class="buttons-left"></div>
+        <div class="buttons-right">
+          <button type="submit" class="btn btn-primary" [disabled]="submitted">Anmelden</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="grid-element">
+      <div class="element-content">
+        <h2 class="content-title">Konto erstellen</h2>
+        <p>
+          <a routerLink="/register">Haben Sie noch kein Konto? Klicken sie hier, um eines zu erstellen.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="grid-element">
+      <div class="element-content">
+        <h2 class="content-title">Passwort zurücksetzen</h2>
+
+        <div [hidden]="resetFormVisible">
+          <p>Haben Sie ihr Passwort vergessen? Klicken sie hier, um es zurückzusetzen.</p>
+          <div class="buttons">
+            <div class="buttons-left"></div>
+            <div class="buttons-right">
+              <button class="btn btn-primary" (click)="showResetForm()">Passwort zurücksetzen</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div *ngIf="resetFormVisible">
+
+          <form [formGroup]="passwordResetForm">
+            <div class="form-group">
+              <label>Benutzername *</label>
+              <input class="form-control" formControlName="email">
+              <fwas-field-error-display [field]="fR['email']" [label]="'Benutzername'" [trigger]="validationTriggerReset"></fwas-field-error-display>
+            </div>
+          </form>
+
+          <div class="buttons">
+            <div class="buttons-left"></div>
+            <div class="buttons-right">
+              <button class="btn btn-primary" [disabled]="submittedReset" (click)="sendResetPasswordEmail()">Passwort
+                zurücksetzen</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

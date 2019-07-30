@@ -1,0 +1,54 @@
+/*
+** VARIABLES **
+*/
+
+$spacing: 1rem;
+$navbar-height: 2.5rem;
+$grid-buttons-height: 4.18rem;
+$h-spacing: 1.875rem;
+// colors
+$red-light: #FF6464;
+$red-dark: #9B5A5A;
+$white: #fff;
+$grey-very-light: #F5F5F5;
+$grey-light: #E3E3E3;
+$grey-medium: #707070;
+// fonts
+$font-family-base: Open Sans;
+$font-family-headings: Asap;
+$font-family-navigation: $font-family-headings;
+$base-font-color: $grey-medium;
+// nav
+$navbar-background: $grey-light;
+$nav-item-background: none;
+$nav-item-color: $red-dark;
+$nav-item-active-background: $red-light;
+$nav-item-active-color: $white;
+$nav-item-hover-background: $red-light;
+$nav-item-hover-color: $white;
+$nav-item-a-padding: ($spacing / 2 $spacing); // content
+$outer-content-background: $grey-very-light;
+$inner-content-padding: $spacing;
+/*
+** BOOT STRAP OVERRIDES **
+*/
+
+// global options
+$spacer: $spacing;
+$enable-rounded: false;
+$enable-shadows: false;
+$enable-gradients: false;
+$enable-transitions: true;
+$enable-hover-media-query: false;
+$enable-grid-classes: true;
+$enable-print-styles: true;
+// other customisations
+$primary: $red-light;
+$font-family-sans-serif: $font-family-base,
+$font-family-headings;
+$navbar-padding-y: 0;
+$grid-gutter-width: $h-spacing;
+$body-color: $base-font-color;
+$font-size-base: 0.875rem;
+$h1-font-size: 1.75rem;
+$h2-font-size: 1.125rem;

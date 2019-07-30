@@ -1,0 +1,88 @@
+<div *ngIf="organisationCreated">
+  <div class="grid-element">
+    <div class="element-content">
+      <h2 class="content-title">
+        Organisation erstellt
+      </h2>
+      <p>
+        {{ successText }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="organisationCreated">
+  <form [formGroup]="organisationForm">
+    <div class="grid-element">
+      <div class="element-content">
+        <h2 class="content-title">
+          Allgemeine Informationen
+        </h2>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="">Name der Organisation *</label>
+              <input type="text" class="form-control" formControlName="name">
+              <fwas-field-error-display [field]="f['name']" [label]="'Name der Organisation'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+            <div class="form-group">
+              <label for="">Webseite *</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">{{ http }}</div>
+                </div>
+                <input type="text" class="form-control" formControlName="websiteUrl">
+              </div>
+              <fwas-field-error-display [field]="f['websiteUrl']" [label]="'Webseite'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+
+            <div class="form-group">
+              <label for="">Beschreibung *</label>
+              <quill-editor [formControl]="f['description']" [modules]="quillOptions" [placeholder]="'Fügen Sie eine Beschreibung hinzu...'"
+                [required]="true"></quill-editor>
+              <fwas-field-error-display [field]="f['description']" [label]="'Beschreibung'" [trigger]="validationTrigger"></fwas-field-error-display>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <fwas-file-upload [image]="organisation?.image" [groupName]="'image'" [mandatory]="true"></fwas-file-upload>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-element">
+      <div class="element-content">
+        <h2 class="content-title">
+          Kontaktperson
+        </h2>
+        <fwas-manage-person [person]="organisation?.contactPerson" [groupName]="'contactPerson'" [validationTrigger]="validationTrigger"></fwas-manage-person>
+      </div>
+    </div>
+  </form>
+
+  <div [hidden]="organisation?.id" class="grid-buttons">
+    <div class="container">
+      <div class="buttons">
+        <div class="buttons-left">
+        </div>
+        <div class="buttons-right">
+          <button class="btn btn-primary" (click)="save()" [disabled]="submitted">Erstellen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="organisation?.id" class="grid-buttons">
+    <div class="container">
+      <div class="buttons">
+        <div class="buttons-left">
+        </div>
+        <div class="buttons-right">
+          <button class="btn btn-primary" (click)="save()" [disabled]="submitted">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
