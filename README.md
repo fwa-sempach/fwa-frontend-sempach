@@ -1,0 +1,1 @@
+fwa-frontend-sempach
