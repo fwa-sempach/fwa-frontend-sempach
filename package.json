@@ -26,7 +26,7 @@
     "@angular/router": "8.1.0",
     "@auth0/angular-jwt": "^2.1.1",
     "@fortawesome/angular-fontawesome": "^0.4.0",
-    "@fortawesome/fontawesome-common-types": "^0.2.19",
+    "@fortawesome/fontawesome-common-types": "^0.2.25",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/pro-light-svg-icons": "^5.9.0",
     "@ng-bootstrap/ng-bootstrap": "^5.0.0",
