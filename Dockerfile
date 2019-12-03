@@ -4,6 +4,7 @@ FROM node:12.10.0-alpine as build
 WORKDIR /app
 
 COPY package*.json ./
+COPY .npmrc ./
 
 RUN npm install
 
