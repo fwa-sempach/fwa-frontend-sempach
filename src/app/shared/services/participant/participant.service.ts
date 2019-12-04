@@ -7,12 +7,11 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ParticipantService {
-
   private url = environment.apiUrl + '/organisations/';
   private participantUrl = '/participants';
   private defaultSort = '?_sort=person.lastname&_order=asc';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public readFiltered(
     organisationId: number,
@@ -21,27 +20,55 @@ export class ParticipantService {
     page: number,
     pageSize: number
   ): Observable<InfoWrapper<Participant>> {
-    const queryUrl = this.generateFilterUrl(organisationId, adIds, status, page, pageSize);
+    const queryUrl = this.generateFilterUrl(
+      organisationId,
+      adIds,
+      status,
+      page,
+      pageSize
+    );
     return this.http.get<InfoWrapper<Participant>>(queryUrl);
   }
 
-  public readById(participantId: number, organisationId: number): Observable<Participant> {
-    const queryUrl = this.url + organisationId + this.participantUrl + '/' + participantId;
+  public readById(
+    participantId: number,
+    organisationId: number
+  ): Observable<Participant> {
+    const queryUrl =
+      this.url + organisationId + this.participantUrl + '/' + participantId;
     return this.http.get<Participant>(queryUrl);
   }
 
-  public save(participant: Participant, notifyOrg: boolean = false): Observable<Participant> {
-    const postUrl = this.url + participant.organisationId + this.participantUrl;
+  public save(
+    participant: Participant,
+    notifyOrg: boolean = false
+  ): Observable<Participant> {
+    const postUrl =
+      this.url +
+      participant.organisationId +
+      this.participantUrl +
+      '?notifyOrg=' +
+      notifyOrg;
     return this.http.post<Participant>(postUrl, participant);
   }
 
   public update(participant: Participant): Observable<Participant> {
-    const putUrl = this.url + participant.organisationId + this.participantUrl + '/' + participant.id;
+    const putUrl =
+      this.url +
+      participant.organisationId +
+      this.participantUrl +
+      '/' +
+      participant.id;
     return this.http.put<Participant>(putUrl, participant);
   }
 
   public delete(participant: Participant): Observable<Participant> {
-    const deleteUrl = this.url + participant.organisationId + this.participantUrl + '/' + participant.id;
+    const deleteUrl =
+      this.url +
+      participant.organisationId +
+      this.participantUrl +
+      '/' +
+      participant.id;
     return this.http.delete<Participant>(deleteUrl);
   }
 
@@ -52,7 +79,8 @@ export class ParticipantService {
     page: number,
     pageSize: number
   ): string {
-    let queryUrl = this.url + organisationId + this.participantUrl + this.defaultSort;
+    let queryUrl =
+      this.url + organisationId + this.participantUrl + this.defaultSort;
 
     if (adIds.length > 0) {
       for (const adId of adIds) {
