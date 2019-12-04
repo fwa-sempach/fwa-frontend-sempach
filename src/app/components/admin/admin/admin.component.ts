@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 export class AdminComponent implements OnInit {
   organisations = new Array<Organisation>();
 
+  confirmDeletionId: number;
+
   constructor(
     private _organisation: OrganisationService,
     private toastr: ToastrService
@@ -31,9 +33,7 @@ export class AdminComponent implements OnInit {
 
     this._organisation.update(organisation, organisation.verified).subscribe(
       data => {
-        this.toastr.success(
-          'Die Organisation wurde erfolgreich gespeichert werden.'
-        );
+        this.toastr.success('Die Organisation wurde erfolgreich gespeichert.');
       },
       error => {
         this.toastr.error(
@@ -46,6 +46,27 @@ export class AdminComponent implements OnInit {
   }
 
   deleteOrganisation(orgaisation: Organisation) {
-    this._organisation.delete(orgaisation).subscribe(console.log, console.log);
+    if (this.confirmDeletionId !== orgaisation.id) {
+      this.confirmDeletionId = orgaisation.id;
+    } else {
+      this._organisation
+        .delete(orgaisation)
+        .subscribe(
+          data => {
+            this.toastr.success('Die Organisation wurde erfolgreich gelöscht.');
+            this.organisations = this.organisations.filter(
+              o => o.id !== orgaisation.id
+            );
+          },
+          error => {
+            this.toastr.error(
+              'Die Organisation konnte nicht gelöscht werden.',
+              'Fehler',
+              { timeOut: 0 }
+            );
+          }
+        )
+        .add(() => (this.confirmDeletionId = undefined));
+    }
   }
 }

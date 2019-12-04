@@ -64,7 +64,11 @@
                   class="btn btn-sm btn-danger"
                   (click)="deleteOrganisation(row)"
                 >
-                  <fa-icon [icon]="['fal', 'trash']"></fa-icon>
+                  <fa-icon
+                    [hidden]="row.id === confirmDeletionId"
+                    [icon]="['fal', 'trash']"
+                  ></fa-icon>
+                  <span *ngIf="row.id === confirmDeletionId">Sicher?</span>
                 </div>
               </ng-template>
             </ngx-datatable-column>
