@@ -1,93 +1,93 @@
 body {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 h1,
 h2,
 h3,
 h4 {
-    font-family: $font-family-headings;
+  font-family: $font-family-headings;
 }
 
 h1 {
-    margin: $spacing 0 $spacing * 2 0 !important;
-    padding-left: $h-spacing;
-    border-left: 3px dotted $red-light;
+  margin: $spacing 0 $spacing * 2 0 !important;
+  padding-left: $h-spacing;
+  border-left: 3px dotted $red-light;
 }
 
 h2 {
-    margin-bottom: $spacing !important;
-    padding-left: $h-spacing;
-    border-left: 3px dotted $red-light;
+  margin-bottom: $spacing !important;
+  padding-left: $h-spacing;
+  border-left: 3px dotted $red-light;
 }
 
 p {
-    text-align: justify;
+  // text-align: justify;
 }
 
 p,
 ul {
-    &:last-child {
-        margin-bottom: 0;
-    }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 ul {
-    padding: 0;
-    margin: 0;
-    list-style: square outside;
-    margin-left: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: square outside;
+  margin-left: 0.75rem;
 }
 
 .strong {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .text-pair {
-    margin-bottom: $spacing;
+  margin-bottom: $spacing;
 }
 
 .outer-content {
-    margin-top: $navbar-height;
-    margin-bottom: $grid-buttons-height;
+  margin-top: $navbar-height;
+  margin-bottom: $grid-buttons-height;
+  min-height: calc(100vh - #{$navbar-height});
+  @media (min-width: 992px) {
+    margin-bottom: 0;
+  }
+  & > .container {
+    background: $outer-content-background;
     min-height: calc(100vh - #{$navbar-height});
-    @media (min-width: 992px) {
-        margin-bottom: 0;
+    .inner-content {
+      min-height: calc(100vh - #{$navbar-height});
+      padding-top: $inner-content-padding;
+      position: relative;
+      @media (min-width: 768px) {
+        padding: 0 $inner-content-padding;
+        padding-top: $inner-content-padding;
+      }
     }
-    &>.container {
-        background: $outer-content-background;
-        min-height: calc(100vh - #{$navbar-height});
-        .inner-content {
-            min-height: calc(100vh - #{$navbar-height});
-            padding-top: $inner-content-padding;
-            position: relative;
-            @media (min-width: 768px) {
-                padding: 0 $inner-content-padding;
-                padding-top: $inner-content-padding;
-            }
-        }
-    }
+  }
 }
 
 .banner {
-    height: 8rem;
-    background-position: center;
-    background-size: cover;
-    margin: -$spacing + 0.0625rem;
-    margin-bottom: $spacing;
-    @media (min-width: 576px) {
-        height: 12rem;
-    }
-    @media (min-width: 768px) {
-        height: 16rem;
-        margin: -$spacing * 2 + 0.0625rem;
-        margin-top: -1rem;
-        margin-bottom: $spacing * 2;
-    }
+  height: 8rem;
+  background-position: center;
+  background-size: cover;
+  margin: -$spacing + 0.0625rem;
+  margin-bottom: $spacing;
+  @media (min-width: 576px) {
+    height: 12rem;
+  }
+  @media (min-width: 768px) {
+    height: 16rem;
+    margin: -$spacing * 2 + 0.0625rem;
+    margin-top: -1rem;
+    margin-bottom: $spacing * 2;
+  }
 }
 
 .loading-wrapper {
-    position: relative;
+  position: relative;
 }
 
 /*

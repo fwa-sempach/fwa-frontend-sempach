@@ -1,44 +1,45 @@
 @import './src/styles';
 .usage-option {
-    display: flex;
-    .grid-element {
-        width: 100%;
-        align-self: stretch;
-        text-decoration: none;
-        color: $base-font-color;
-        p {
-            text-align: left;
-        }
-        &:hover {
-            cursor: pointer;
-            background: $red-light;
-            * {
-                color: $white;
-                border-color: $white;
-            }
-        }
+  display: flex;
+  .grid-element {
+    width: 100%;
+    align-self: stretch;
+    text-decoration: none;
+    color: $base-font-color;
+    p {
+      text-align: left;
     }
+    &:hover {
+      cursor: pointer;
+      background: $red-light;
+      * {
+        color: $white;
+        border-color: $white;
+      }
+    }
+  }
 }
 
 .organisations {
-    .grid-element {
-        width: 100%;
-        height: 10rem;
-        .organisation-link {
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            flex: 1;
-            border: $spacing / 2 solid $white;
-            text-align: center;
-            &:hover {
-                border-bottom-color: $red-light; // background-position-y: -3px;
-                // border-width: $spacing / 2;
-            }
-            img {
-                max-width: 100%;
-                max-height: 100%;
-            }
-        }
+  .grid-element {
+    width: 100%;
+    height: 10rem;
+    flex-direction: row;
+    .organisation-link {
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      flex: 1;
+      border: $spacing / 2 solid $white;
+      text-align: center;
+      &:hover {
+        border-bottom-color: $red-light; // background-position-y: -3px;
+        // border-width: $spacing / 2;
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
     }
+  }
 }
