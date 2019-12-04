@@ -5,36 +5,66 @@
     <ng-template ngbTabContent>
       <div class="grid-element">
         <div class="element-content">
-          <ngx-datatable class="bootstrap" [rows]="organisations" [columnMode]="'flex'" [messages]="{emptyMessage: 'Keine Daten vorhanden'}"
-            [rowHeight]="undefined">
+          <ngx-datatable
+            class="bootstrap"
+            [rows]="organisations"
+            [columnMode]="'flex'"
+            [messages]="{ emptyMessage: 'Keine Daten vorhanden' }"
+            [rowHeight]="undefined"
+          >
             <ngx-datatable-column name="Aktiv" prop="verified" [flexGrow]="0.5">
               <ng-template let-value="value" ngx-datatable-cell-template>
-                <input type="checkbox" [checked]="value" disabled="disabled">
+                <input type="checkbox" [checked]="value" disabled="disabled" />
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Name" prop="name" [flexGrow]="3">
               <ng-template let-value="value" ngx-datatable-cell-template>
-                <strong>{{value}}</strong>
+                <strong>{{ value }}</strong>
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Beschreibung" prop="description" [flexGrow]="3">
+            <ngx-datatable-column
+              name="Beschreibung"
+              prop="description"
+              [flexGrow]="3"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
-                {{ value | striphtml | slice:0:27 }}{{ (value | striphtml).length > 30 ? '...' : '' }}
+                {{ value | striphtml | slice: 0:27 }}
+                {{ (value | striphtml).length > 30 ? '...' : '' }}
               </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="" prop="" [flexGrow]="2" [cellClass]="'datatable-buttons'">
+            <ngx-datatable-column
+              name=""
+              prop=""
+              [flexGrow]="2"
+              [cellClass]="'datatable-buttons'"
+            >
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <a routerLink="/manage/organisationen/{{row.id}}">
+                <a routerLink="/manage/organisationen/{{ row.id }}">
                   <div class="btn btn-primary">
                     <fa-icon [icon]="['fal', 'pen']"></fa-icon>
                   </div>
                 </a>
-                <div [hidden]="row.verified" class="btn btn-sm btn-primary" (click)="changeOrganisationActive(row)">
+                <div
+                  [hidden]="row.verified"
+                  class="btn btn-sm btn-primary"
+                  (click)="changeOrganisationActive(row)"
+                >
                   Aktivieren
                 </div>
-                <div *ngIf="row.verified" class="btn btn-sm btn-secondary" (click)="changeOrganisationActive(row)">
+                <div
+                  *ngIf="row.verified"
+                  class="btn btn-sm btn-secondary"
+                  (click)="changeOrganisationActive(row)"
+                >
                   Deaktivieren
+                </div>
+
+                <div
+                  class="btn btn-sm btn-danger"
+                  (click)="deleteOrganisation(row)"
+                >
+                  <fa-icon [icon]="['fal', 'trash']"></fa-icon>
                 </div>
               </ng-template>
             </ngx-datatable-column>

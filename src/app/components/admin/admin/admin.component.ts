@@ -9,24 +9,21 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
   organisations = new Array<Organisation>();
 
   constructor(
     private _organisation: OrganisationService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.readOrganisations();
   }
 
   private readOrganisations() {
-    this._organisation.readFiltered(1, 100000, false).subscribe(
-      data => {
-        this.organisations = data.elements;
-      }
-    );
+    this._organisation.readFiltered(1, 100000, false).subscribe(data => {
+      this.organisations = data.elements;
+    });
   }
 
   changeOrganisationActive(organisation: Organisation) {
@@ -34,12 +31,21 @@ export class AdminComponent implements OnInit {
 
     this._organisation.update(organisation, organisation.verified).subscribe(
       data => {
-        this.toastr.success('Die Organisation wurde erfolgreich gespeichert werden.');
+        this.toastr.success(
+          'Die Organisation wurde erfolgreich gespeichert werden.'
+        );
       },
       error => {
-        this.toastr.error('Die Organisation konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
+        this.toastr.error(
+          'Die Organisation konnte nicht gespeichert werden.',
+          'Fehler',
+          { timeOut: 0 }
+        );
       }
     );
   }
 
+  deleteOrganisation(orgaisation: Organisation) {
+    this._organisation.delete(orgaisation).subscribe(console.log, console.log);
+  }
 }
