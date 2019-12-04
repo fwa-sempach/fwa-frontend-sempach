@@ -1,13 +1,20 @@
-<a routerLink="/organisationen/{{organisation?.id}}" class="grid-element">
+<a routerLink="/organisationen/{{ organisation?.id }}" class="grid-element">
   <div class="element-content">
-    <h2 class="element-title">{{organisation?.name}}</h2>
+    <h2 class="element-title">{{ organisation?.name }}</h2>
     <p class="element-sub-title">
-      {{organisation?.contactPerson.firstname}} {{organisation?.contactPerson.lastname}}
-      <br />{{organisation?.contactPerson.phone}}
-      <br />{{organisation?.contactPerson.email}}
+      {{ organisation?.contactPerson.firstname }}
+      {{ organisation?.contactPerson.lastname }} <br />{{
+        organisation?.contactPerson.phone
+      }}
+      <br />{{ organisation?.contactPerson.email }}
     </p>
   </div>
   <div class="element-side right">
-    <div class="element-side-image contain" [ngStyle]="{ 'background-image': 'url(' + organisation?.image.imageUrl + ')'}"></div>
+    <div
+      class="element-side-image contain"
+      [ngStyle]="{
+        'background-image': 'url(' + organisation?.image.imageUrl + ')'
+      }"
+    ></div>
   </div>
 </a>
