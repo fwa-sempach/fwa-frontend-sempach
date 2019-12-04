@@ -2,9 +2,11 @@
 <fwas-page-not-working *ngIf="isError && !notFound"></fwas-page-not-working>
 
 <div [hidden]="isError">
-  <h1>{{organisation?.name}}</h1>
+  <h1>{{ organisation?.name }}</h1>
 
-  <fwas-organisation-header [organisation]="organisation"></fwas-organisation-header>
+  <fwas-organisation-header
+    [organisation]="organisation"
+  ></fwas-organisation-header>
 
   <ngb-tabset>
     <ngb-tab title="Informationen">
@@ -19,7 +21,7 @@
                     Name der Organisation
                   </div>
                   <div>
-                    {{organisation?.name}}
+                    {{ organisation?.name }}
                   </div>
                 </div>
                 <div class="text-pair">
@@ -27,7 +29,8 @@
                     Veranwortliche Person
                   </div>
                   <div>
-                    {{organisation?.contactPerson.firstname}} {{organisation?.contactPerson.lastname}}
+                    {{ organisation?.contactPerson.firstname }}
+                    {{ organisation?.contactPerson.lastname }}
                   </div>
                 </div>
                 <div class="text-pair">
@@ -35,7 +38,7 @@
                     Telefonnummer
                   </div>
                   <div>
-                    {{organisation?.contactPerson.phone}}
+                    {{ organisation?.contactPerson.phone }}
                   </div>
                 </div>
                 <div class="text-pair">
@@ -43,7 +46,9 @@
                     Emailadresse
                   </div>
                   <div>
-                    {{organisation?.contactPerson.email}}
+                    <a href="mailto:{{ organisation?.contactPerson.email }}">{{
+                      organisation?.contactPerson.email
+                    }}</a>
                   </div>
                 </div>
                 <div class="text-pair">
@@ -51,7 +56,8 @@
                     Adresse
                   </div>
                   <div>
-                    {{organisation?.contactPerson.street}} {{organisation?.contactPerson.houseNr}}
+                    {{ organisation?.contactPerson.street }}
+                    {{ organisation?.contactPerson.houseNr }}
                   </div>
                 </div>
                 <div class="text-pair">
@@ -59,7 +65,7 @@
                     PLZ
                   </div>
                   <div>
-                    {{organisation?.contactPerson.zip}}
+                    {{ organisation?.contactPerson.zip }}
                   </div>
                 </div>
                 <div class="text-pair">
@@ -67,7 +73,7 @@
                     Ort
                   </div>
                   <div>
-                    {{organisation?.contactPerson.city}}
+                    {{ organisation?.contactPerson.city }}
                   </div>
                 </div>
                 <div class="text-pair">
@@ -75,7 +81,9 @@
                     Webseite
                   </div>
                   <div>
-                    <a href="{{organisation?.websiteUrl}}" target="_blank">{{organisation?.websiteUrl}}</a>
+                    <a href="{{ organisation?.websiteUrl }}" target="_blank">{{
+                      organisation?.websiteUrl
+                    }}</a>
                   </div>
                 </div>
               </div>

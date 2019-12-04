@@ -7,14 +7,15 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class OrganisationService {
-
   private url = environment.apiUrl + '/organisations';
   private defaultSort = '?_sort=orgName&_order=asc';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public readAll(): Observable<InfoWrapper<Organisation>> {
-    return this.http.get<InfoWrapper<Organisation>>(this.url + '?_size=1000000');
+    return this.http.get<InfoWrapper<Organisation>>(
+      this.url + '?_size=1000000'
+    );
   }
 
   public readFiltered(
@@ -35,12 +36,28 @@ export class OrganisationService {
     return this.http.post<Organisation>(this.url, organisation);
   }
 
-  public update(organisation: Organisation, notifyOrg: boolean = false): Observable<Organisation> {
+  public update(
+    organisation: Organisation,
+    notifyOrg: boolean = false
+  ): Observable<Organisation> {
     const putUrl = this.url + '/' + organisation.id + '?notifyOrg=' + notifyOrg;
     return this.http.put<Organisation>(putUrl, organisation);
   }
 
-  private generateFilterUrl(page: number, pageSize: number, onlyVerified: boolean): string {
+  public delete(
+    organisation: Organisation,
+    notifyOrg: boolean = false
+  ): Observable<Organisation> {
+    const deleteUrl =
+      this.url + '/' + organisation.id + '?notifyOrg=' + notifyOrg;
+    return this.http.delete<Organisation>(deleteUrl);
+  }
+
+  private generateFilterUrl(
+    page: number,
+    pageSize: number,
+    onlyVerified: boolean
+  ): string {
     let queryUrl = this.url + this.defaultSort;
 
     queryUrl += '&_page=' + page;
