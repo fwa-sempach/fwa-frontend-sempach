@@ -24,7 +24,7 @@ jobs:
           # Use snapshot to push an additional image
           # snapshot: # optional
           # Use dockerfile when you would like to explicitly build a Dockerfile
-          # dockerfile: # optional
+          dockerfile: DockerfileStaging
           # Use workdir when you would like to change the directory for building
           # workdir: # optional
           # Use buildargs when you want to pass a list of environment variables as build-args
