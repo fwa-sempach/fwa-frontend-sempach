@@ -1,29 +1,3 @@
-import { AppRoutingModule } from './app-routing.module';
-import { AdDetailComponent } from './components/ad-detail/ad-detail.component';
-import { AdminComponent } from './components/admin/admin/admin.component';
-import { CandidatureComponent } from './components/candidature/candidature.component';
-import { DocumentsComponent } from './components/documents/documents.component';
-import { ImprintComponent } from './components/imprint/imprint.component';
-import { CreateOrganisationComponent } from './components/manage/create-organisation/create-organisation.component';
-import { ManageOrganisationComponent } from './components/manage/manage-organisation/manage-organisation.component';
-import { OfferDetailComponent } from './components/offer-detail/offer-detail.component';
-import { OrganisationDetailComponent } from './components/organisation-detail/organisation-detail.component';
-import { OrganisationsComponent } from './components/organisations/organisations.component';
-import { RegisterComponent } from './components/register/register.component';
-import { ManagePersonComponent } from './shared/components/admin/manage-person/manage-person.component';
-import { FieldErrorDisplayComponent } from './shared/components/field-error-display/field-error-display.component';
-import { FileUploadComponent } from './shared/components/file-upload/file-upload.component';
-import { ManageAdComponent } from './shared/components/manage/manage-ad/manage-ad.component';
-import { ManageOfferComponent } from './shared/components/manage/manage-offer/manage-offer.component';
-import { ManageOrganisationInfoComponent } from './shared/components/manage/manage-organisation-info/manage-organisation-info.component';
-import { ManageParticipantComponent } from './shared/components/manage/manage-participant/manage-participant.component';
-import { ManageUserInfoComponent } from './shared/components/manage/manage-user-info/manage-user-info.component';
-import { OrganisationHeaderComponent } from './shared/components/organisation-header/organisation-header.component';
-import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-import { PageNotWorkingComponent } from './shared/components/page-not-working/page-not-working.component';
-import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
-import { NgbDateChParserFormatter } from './shared/providers/ngb-date-ch-parser-formatter';
-import { FormService } from './shared/services/form/form.service';
 import {
   HashLocationStrategy,
   LocationStrategy,
@@ -68,7 +42,34 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { QuillModule } from 'ngx-quill';
 import { ToastrModule } from 'ngx-toastr';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AdDetailComponent } from './components/ad-detail/ad-detail.component';
+import { AdminComponent } from './components/admin/admin/admin.component';
+import { CandidatureComponent } from './components/candidature/candidature.component';
+import { DocumentsComponent } from './components/documents/documents.component';
+import { ImprintComponent } from './components/imprint/imprint.component';
+import { CreateOrganisationComponent } from './components/manage/create-organisation/create-organisation.component';
+import { ManageOrganisationComponent } from './components/manage/manage-organisation/manage-organisation.component';
+import { OfferDetailComponent } from './components/offer-detail/offer-detail.component';
+import { OrganisationDetailComponent } from './components/organisation-detail/organisation-detail.component';
+import { OrganisationsComponent } from './components/organisations/organisations.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ManagePersonComponent } from './shared/components/admin/manage-person/manage-person.component';
+import { FieldErrorDisplayComponent } from './shared/components/field-error-display/field-error-display.component';
+import { FileUploadComponent } from './shared/components/file-upload/file-upload.component';
+import { ManageAdComponent } from './shared/components/manage/manage-ad/manage-ad.component';
+import { ManageOfferComponent } from './shared/components/manage/manage-offer/manage-offer.component';
+import { ManageOrganisationInfoComponent } from './shared/components/manage/manage-organisation-info/manage-organisation-info.component';
+import { ManageParticipantComponent } from './shared/components/manage/manage-participant/manage-participant.component';
+import { ManageUserInfoComponent } from './shared/components/manage/manage-user-info/manage-user-info.component';
+import { OrganisationHeaderComponent } from './shared/components/organisation-header/organisation-header.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { PageNotWorkingComponent } from './shared/components/page-not-working/page-not-working.component';
+import { StripHtmlPipe } from './shared/pipes/strip-html.pipe';
+import { NgbDateChParserFormatter } from './shared/providers/ngb-date-ch-parser-formatter';
+import { FormService } from './shared/services/form/form.service';
 
 // Font Awesome Icons
 library.add(fal);

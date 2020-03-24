@@ -58,7 +58,7 @@ export class OfferComponent implements OnInit {
     forkJoin([categoryObs, organisationObs]).subscribe(
       (results) => {
         this.categories = results[0];
-        this.organisations = (<InfoWrapper<Organisation>>results[1]).elements;
+        this.organisations = (results[1] as InfoWrapper<Organisation>).elements;
         this.createForm();
       },
       (error) => {

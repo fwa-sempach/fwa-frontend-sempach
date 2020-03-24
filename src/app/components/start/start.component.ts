@@ -28,7 +28,7 @@ export class StartComponent implements OnInit {
     // run multiple observables in parallel
     forkJoin([configObs, organisationObs]).subscribe((results) => {
       this.config = results[0];
-      this.organisations = (<InfoWrapper<Organisation>>results[1]).elements;
+      this.organisations = (results[1] as InfoWrapper<Organisation>).elements;
       this.isLoading = false;
     });
   }

@@ -66,9 +66,9 @@ export class ManageOrganisationComponent implements OnInit {
       forkJoin([organisationObs, offerObs, adObs, participantObs]).subscribe(
         (results) => {
           this.organisation = results[0];
-          this.offers = <Array<Offer>>results[1].elements;
-          this.ads = <Array<Ad>>results[2].elements;
-          this.participants = <Array<Participant>>results[3].elements;
+          this.offers = results[1].elements as Array<Offer>;
+          this.ads = results[2].elements as Array<Ad>;
+          this.participants = results[3].elements as Array<Participant>;
         }
       );
     });

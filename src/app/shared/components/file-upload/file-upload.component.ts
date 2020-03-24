@@ -36,7 +36,7 @@ export class FileUploadComponent implements OnInit, OnChanges {
     this.createForm();
 
     this.fileReader.onload = (file) => {
-      this.image.data = <string>this.fileReader.result;
+      this.image.data = this.fileReader.result as string;
       this.parent.form.controls[this.groupName].setValue(this.image);
     };
   }

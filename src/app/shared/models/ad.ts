@@ -1,6 +1,6 @@
-import { Offer } from '@app/shared/models/offer';
-import { Image } from '@app/shared/models/image';
 import { BasicCondition } from '@app/shared/models/basicCondition';
+import { Image } from '@app/shared/models/image';
+import { Offer } from '@app/shared/models/offer';
 import { Task } from '@app/shared/models/task';
 
 export class Ad {

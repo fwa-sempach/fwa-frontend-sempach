@@ -4,13 +4,13 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
+  Output
 } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { Ad } from '@app/shared/models/ad';
 import { Offer } from '@app/shared/models/offer';
@@ -19,14 +19,14 @@ import { AdService } from '@app/shared/services/ad/ad.service';
 import { FormService } from '@app/shared/services/form/form.service';
 import {
   NgbDateAdapter,
-  NgbDateNativeAdapter,
+  NgbDateNativeAdapter
 } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'fwas-manage-ad',
   templateUrl: './manage-ad.component.html',
-  styleUrls: ['./manage-ad.component.scss'],
+  styleUrls: ['./manage-ad.component.scss']
 })
 export class ManageAdComponent implements OnInit, OnChanges {
   @Input()
@@ -70,7 +70,7 @@ export class ManageAdComponent implements OnInit, OnChanges {
         title: [this.ad.title, [Validators.required, Validators.maxLength(50)]],
         numberOfVolunteersNeeded: [
           this.ad.numberOfVolunteersNeeded,
-          [Validators.required, Validators.pattern(/^\d*$/)],
+          [Validators.required, Validators.pattern(/^\d*$/)]
         ],
         releaseDate: [new Date(this.ad.releaseDate), [Validators.required]],
         validUntil: [new Date(this.ad.validUntil), [Validators.required]],
@@ -78,10 +78,10 @@ export class ManageAdComponent implements OnInit, OnChanges {
         active: [this.ad.active],
         // todo: task, BC validator
         tasks: [this.ad.tasks, [Validators.required]],
-        basicConditions: [this.ad.basicConditions, [Validators.required]],
+        basicConditions: [this.ad.basicConditions, [Validators.required]]
       },
       {
-        validator: dateOrderChecker,
+        validator: dateOrderChecker
       }
     );
   }
@@ -99,12 +99,12 @@ export class ManageAdComponent implements OnInit, OnChanges {
         .delete(this.ad)
         .finally(() => (this.deleted = false))
         .subscribe(
-          (data) => {
+          data => {
             this.ad.deleted = true;
             this.changedAd.emit(this.ad);
             this.toastr.success('Das Inserat wurde erfolgreich gelöscht.');
           },
-          (error) => {
+          error => {
             this.toastr.error(
               'Das Inserat konnte nicht gelöscht werden.',
               'Fehler',
@@ -130,10 +130,10 @@ export class ManageAdComponent implements OnInit, OnChanges {
           .update(adToSave)
           .finally(() => (this.submitted = false))
           .subscribe(
-            (data) => {
+            data => {
               this.postSave(data);
             },
-            (err) => {
+            err => {
               this.toastr.error(
                 'Das Inserat konnte nicht gespeichert werden.',
                 'Fehler',
@@ -146,10 +146,10 @@ export class ManageAdComponent implements OnInit, OnChanges {
           .save(adToSave)
           .finally(() => (this.submitted = false))
           .subscribe(
-            (data) => {
+            data => {
               this.postSave(data);
             },
-            (err) => {
+            err => {
               this.toastr.error(
                 'Das Inserat konnte nicht gespeichert werden.',
                 'Fehler',
@@ -189,7 +189,7 @@ export function dateOrderChecker(c: AbstractControl) {
     return null;
   }
 
-  if (<Date>start.value < <Date>end.value) {
+  if ((start.value as Date) < (end.value as Date)) {
     return null;
   } else {
     end.setErrors(error);

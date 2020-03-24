@@ -75,7 +75,7 @@ export class AuthService {
 
   public renew(): Observable<any> {
     const token = this.getToken();
-    const user = { token: token };
+    const user = { token };
     const postUrl = this.url + '/renew';
     return this.http.post<object>(postUrl, user);
   }

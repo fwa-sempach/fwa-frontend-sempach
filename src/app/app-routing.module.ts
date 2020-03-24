@@ -1,6 +1,3 @@
-import { ImprintComponent } from './components/imprint/imprint.component';
-import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
-import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdDetailComponent } from '@app/components/ad-detail/ad-detail.component';
@@ -19,6 +16,10 @@ import { StartComponent } from '@app/components/start/start.component';
 import { AdminGuard } from '@app/shared/guards/admin/admin.guard';
 import { NewOrganisationGuard } from '@app/shared/guards/new-organisation/new-organisation.guard';
 import { OrganisationGuard } from '@app/shared/guards/organisation/organisation.guard';
+
+import { ImprintComponent } from './components/imprint/imprint.component';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'start', component: StartComponent },

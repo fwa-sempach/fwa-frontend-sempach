@@ -38,7 +38,7 @@ export class NavigationComponent implements OnInit {
 
   private readSession() {
     this.auth.sessionEmitter.subscribe((data) => {
-      this.parseSession(<Session>data);
+      this.parseSession(data as Session);
     });
   }
 

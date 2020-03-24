@@ -8,7 +8,7 @@ export class FormService {
   constructor() {}
 
   public markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach((control) => {
+    (Object as any).values(formGroup.controls).forEach((control) => {
       if (control.controls) {
         // control is a FormGroup
         this.markFormGroupTouched(control);
