@@ -1,21 +1,13 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit
-  } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { FormService } from '@app/shared/services/form/form.service';
 
 @Component({
   selector: 'fwas-field-error-display',
   templateUrl: './field-error-display.component.html',
-  styleUrls: ['./field-error-display.component.scss']
+  styleUrls: ['./field-error-display.component.scss'],
 })
 export class FieldErrorDisplayComponent implements OnInit, OnChanges {
-
-
-
   @Input()
   field: FormControl;
   @Input()
@@ -28,24 +20,24 @@ export class FieldErrorDisplayComponent implements OnInit, OnChanges {
   displayError: boolean;
   errorMessage: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    this.field.valueChanges.subscribe(data => {
+    this.field.valueChanges.subscribe((data) => {
       this.validate();
     });
 
-    this.field.statusChanges.subscribe(data => {
+    this.field.statusChanges.subscribe((data) => {
       this.validate();
     });
   }
 
   ngOnChanges() {
-    this.field.valueChanges.subscribe(data => {
+    this.field.valueChanges.subscribe((data) => {
       this.validate();
     });
 
-    this.field.statusChanges.subscribe(data => {
+    this.field.statusChanges.subscribe((data) => {
       this.validate();
     });
 
@@ -68,9 +60,15 @@ export class FieldErrorDisplayComponent implements OnInit, OnChanges {
       if (this.field.errors.required) {
         message = 'ist ein Pflichtfeld';
       } else if (this.field.hasError('maxlength')) {
-        message = 'darf nicht länger als ' + this.field.errors.maxlength.requiredLength + ' Zeichen sein';
+        message =
+          'darf nicht länger als ' +
+          this.field.errors.maxlength.requiredLength +
+          ' Zeichen sein';
       } else if (this.field.hasError('minlength')) {
-        message = 'muss mindestens ' + this.field.errors.minlength.requiredLength + ' Zeichen lang sein';
+        message =
+          'muss mindestens ' +
+          this.field.errors.minlength.requiredLength +
+          ' Zeichen lang sein';
       } else if (this.message !== null && this.message !== undefined) {
         message = this.message;
       } else if (this.field.errors.email) {

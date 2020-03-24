@@ -5,7 +5,7 @@ import { AdService } from './ad.service';
 describe('AdService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AdService]
+      providers: [AdService],
     });
   });
 

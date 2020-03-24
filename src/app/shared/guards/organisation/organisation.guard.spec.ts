@@ -5,7 +5,7 @@ import { OrganisationGuard } from './organisation.guard';
 describe('OrganisationGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [OrganisationGuard]
+      providers: [OrganisationGuard],
     });
   });
 

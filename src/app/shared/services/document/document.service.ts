@@ -6,10 +6,9 @@ import { Document } from '@app/shared/models/document';
 
 @Injectable()
 export class DocumentService {
-
   private url = environment.apiUrl + '/documents';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public readInfoDocuments(): Observable<Array<Document>> {
     return this.http.get<Array<Document>>(this.url);

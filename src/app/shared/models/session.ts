@@ -1,5 +1,5 @@
 export class Session {
-    username: string;
-    organisationId: number;
-    roleCodes: Array<string>;
+  username: string;
+  organisationId: number;
+  roleCodes: Array<string>;
 }

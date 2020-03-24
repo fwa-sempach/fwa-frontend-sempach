@@ -1,11 +1,16 @@
-<h1>{{organisation?.name}}</h1>
+<h1>{{ organisation?.name }}</h1>
 
-<fwas-organisation-header [organisation]="organisation"></fwas-organisation-header>
+<fwas-organisation-header
+  [organisation]="organisation"
+></fwas-organisation-header>
 
 <ngb-tabset>
   <ngb-tab title="Informationen">
     <ng-template ngbTabContent>
-      <fwas-manage-organisation-info [organisation]="organisation" (updateImage)="updateImage($event)"></fwas-manage-organisation-info>
+      <fwas-manage-organisation-info
+        [organisation]="organisation"
+        (updateImage)="updateImage($event)"
+      ></fwas-manage-organisation-info>
     </ng-template>
   </ngb-tab>
 
@@ -17,11 +22,16 @@
             Angebote
           </h2>
 
-          <ngx-datatable class="bootstrap" [rows]="offers" [columnMode]="'flex'" [messages]="{emptyMessage: 'Keine Daten vorhanden'}"
-            [rowHeight]="undefined">
+          <ngx-datatable
+            class="bootstrap"
+            [rows]="offers"
+            [columnMode]="'flex'"
+            [messages]="{ emptyMessage: 'Keine Daten vorhanden' }"
+            [rowHeight]="undefined"
+          >
             <ngx-datatable-column name="Aktiv" prop="active" [flexGrow]="0.5">
               <ng-template let-value="value" ngx-datatable-cell-template>
-                <input type="checkbox" [checked]="value" disabled="disabled">
+                <input type="checkbox" [checked]="value" disabled="disabled" />
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Name" prop="title" [flexGrow]="3">
@@ -29,18 +39,33 @@
                 <strong>{{ value }}</strong>
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Kategorie" prop="category.name" [flexGrow]="2">
+            <ngx-datatable-column
+              name="Kategorie"
+              prop="category.name"
+              [flexGrow]="2"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 {{ value }}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Beschreibung" prop="description" [flexGrow]="3">
+            <ngx-datatable-column
+              name="Beschreibung"
+              prop="description"
+              [flexGrow]="3"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 <!-- {{ value.length > 30 ? (value | striphtml | slice:0:27).trim() + '...' : value }} -->
-                {{ value | striphtml | slice:0:27 }}{{ (value | striphtml).length > 30 ? '...' : '' }}
+                {{ value | striphtml | slice: 0:27
+                }}{{ (value | striphtml).length > 30 ? '...' : '' }}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="" prop="id" [flexGrow]="1" [cellClass]="'datatable-buttons'" minWidth="80">
+            <ngx-datatable-column
+              name=""
+              prop="id"
+              [flexGrow]="1"
+              [cellClass]="'datatable-buttons'"
+              minWidth="80"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 <span></span>
                 <div class="btn btn-sm btn-primary" (click)="editOffer(value)">
@@ -55,18 +80,23 @@
       <div class="grid-buttons">
         <div class="container">
           <div class="buttons">
-            <div class="buttons-left">
-            </div>
+            <div class="buttons-left"></div>
             <div class="buttons-right">
-              <div (click)="addOffer()" class="btn btn-primary">Angebot hinzufügen</div>
+              <div (click)="addOffer()" class="btn btn-primary">
+                Angebot hinzufügen
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <fwas-manage-offer *ngIf="currentOffer" [offer]="currentOffer" [organisation]="organisation" (cancelOffer)="cancelOfferEditing($event)"
-        (changedOffer)="changedOffer($event)"></fwas-manage-offer>
-
+      <fwas-manage-offer
+        *ngIf="currentOffer"
+        [offer]="currentOffer"
+        [organisation]="organisation"
+        (cancelOffer)="cancelOfferEditing($event)"
+        (changedOffer)="changedOffer($event)"
+      ></fwas-manage-offer>
     </ng-template>
   </ngb-tab>
 
@@ -78,11 +108,16 @@
             Inserate
           </h2>
 
-          <ngx-datatable class="bootstrap" [rows]="ads" [columnMode]="'flex'" [messages]="{emptyMessage: 'Keine Daten vorhanden'}"
-            [rowHeight]="undefined">
+          <ngx-datatable
+            class="bootstrap"
+            [rows]="ads"
+            [columnMode]="'flex'"
+            [messages]="{ emptyMessage: 'Keine Daten vorhanden' }"
+            [rowHeight]="undefined"
+          >
             <ngx-datatable-column name="Aktiv" prop="active" [flexGrow]="0.5">
               <ng-template let-value="value" ngx-datatable-cell-template>
-                <input type="checkbox" [checked]="value" disabled="disabled">
+                <input type="checkbox" [checked]="value" disabled="disabled" />
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Name" prop="title" [flexGrow]="3">
@@ -90,20 +125,36 @@
                 <strong>{{ value }}</strong>
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Angebot" prop="offer.title" [flexGrow]="2">
+            <ngx-datatable-column
+              name="Angebot"
+              prop="offer.title"
+              [flexGrow]="2"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 {{ value }}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Veröffentlichungsdatum" prop="releaseDate" [flexGrow]="3">
+            <ngx-datatable-column
+              name="Veröffentlichungsdatum"
+              prop="releaseDate"
+              [flexGrow]="3"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
-                {{ value | date:'mediumDate'}}
+                {{ value | date: 'mediumDate' }}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="" prop="id" [flexGrow]="1" [cellClass]="'datatable-buttons'" minWidth="80">
+            <ngx-datatable-column
+              name=""
+              prop="id"
+              [flexGrow]="1"
+              [cellClass]="'datatable-buttons'"
+              minWidth="80"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 <span></span>
-                <div class="btn btn-sm btn-primary" (click)="editAd(value)">Bearbeiten</div>
+                <div class="btn btn-sm btn-primary" (click)="editAd(value)">
+                  Bearbeiten
+                </div>
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>
@@ -113,18 +164,23 @@
       <div class="grid-buttons">
         <div class="container">
           <div class="buttons">
-            <div class="buttons-left">
-            </div>
+            <div class="buttons-left"></div>
             <div class="buttons-right">
-              <div (click)="addAd()" class="btn btn-primary">Inserat hinzufügen</div>
+              <div (click)="addAd()" class="btn btn-primary">
+                Inserat hinzufügen
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <fwas-manage-ad *ngIf="currentAd" [ad]="currentAd" [offers]="offers" (cancelAd)="cancelAdEditing($event)"
-        (changedAd)="changedAd($event)"></fwas-manage-ad>
-
+      <fwas-manage-ad
+        *ngIf="currentAd"
+        [ad]="currentAd"
+        [offers]="offers"
+        (cancelAd)="cancelAdEditing($event)"
+        (changedAd)="changedAd($event)"
+      ></fwas-manage-ad>
     </ng-template>
   </ngb-tab>
 
@@ -136,14 +192,27 @@
 
       <div class="grid-element">
         <div class="element-content">
-          <ngx-datatable class="bootstrap" [rows]="participants" [columnMode]="'flex'" [messages]="{emptyMessage: 'Keine Daten vorhanden'}"
-            [rowHeight]="undefined">
-            <ngx-datatable-column name="Vorname" prop="person.firstname" [flexGrow]="1">
+          <ngx-datatable
+            class="bootstrap"
+            [rows]="participants"
+            [columnMode]="'flex'"
+            [messages]="{ emptyMessage: 'Keine Daten vorhanden' }"
+            [rowHeight]="undefined"
+          >
+            <ngx-datatable-column
+              name="Vorname"
+              prop="person.firstname"
+              [flexGrow]="1"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 <strong>{{ value }}</strong>
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Nachname" prop="person.lastname" [flexGrow]="1">
+            <ngx-datatable-column
+              name="Nachname"
+              prop="person.lastname"
+              [flexGrow]="1"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 <strong>{{ value }}</strong>
               </ng-template>
@@ -158,45 +227,62 @@
                 {{ adTitle(value) || 'nicht zugeordnet' }}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Bemerkung" prop="annotation" [flexGrow]="2">
+            <ngx-datatable-column
+              name="Bemerkung"
+              prop="annotation"
+              [flexGrow]="2"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 {{ value }}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="" prop="id" [flexGrow]="1" [cellClass]="'datatable-buttons'" minWidth="80">
+            <ngx-datatable-column
+              name=""
+              prop="id"
+              [flexGrow]="1"
+              [cellClass]="'datatable-buttons'"
+              minWidth="80"
+            >
               <ng-template let-value="value" ngx-datatable-cell-template>
                 <span></span>
-                <div class="btn btn-sm btn-primary" (click)="editParticipant(value)">Bearbeiten</div>
+                <div
+                  class="btn btn-sm btn-primary"
+                  (click)="editParticipant(value)"
+                >
+                  Bearbeiten
+                </div>
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>
         </div>
       </div>
 
-
       <div class="grid-buttons">
         <div class="container">
           <div class="buttons">
-            <div class="buttons-left">
-            </div>
+            <div class="buttons-left"></div>
             <div class="buttons-right">
-              <div (click)="addParticipant()" class="btn btn-primary">Person hinzufügen</div>
+              <div (click)="addParticipant()" class="btn btn-primary">
+                Person hinzufügen
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <fwas-manage-participant *ngIf="currentParticipant" [participant]="currentParticipant" [ads]="ads"
-        (cancelParticipant)="cancelParticipantEditing($event)" (changedParticipant)="changedParticipant($event)"></fwas-manage-participant>
-
+      <fwas-manage-participant
+        *ngIf="currentParticipant"
+        [participant]="currentParticipant"
+        [ads]="ads"
+        (cancelParticipant)="cancelParticipantEditing($event)"
+        (changedParticipant)="changedParticipant($event)"
+      ></fwas-manage-participant>
     </ng-template>
   </ngb-tab>
-
 
   <ngb-tab *ngIf="!isAdmin" title="Benutzerdaten">
     <ng-template ngbTabContent>
       <fwas-manage-user-info></fwas-manage-user-info>
     </ng-template>
   </ngb-tab>
-
 </ngb-tabset>

@@ -11,27 +11,51 @@
         </div>
       </div> -->
 
-      <div *ngFor="let organisation of organisations" class="grid-element offer">
+      <div
+        *ngFor="let organisation of organisations"
+        class="grid-element offer"
+      >
         <div class="element-side left">
-          <div class="element-side-image contain" [ngStyle]="{ 'background-image': 'url(' + organisation.image.imageUrl + ')'}"></div>
+          <div
+            class="element-side-image contain"
+            [ngStyle]="{
+              'background-image': 'url(' + organisation.image.imageUrl + ')'
+            }"
+          ></div>
         </div>
         <div class="element-content">
-          <h2 class="element-title">{{organisation.name}}</h2>
+          <h2 class="element-title">{{ organisation.name }}</h2>
           <p [innerHtml]="organisation.description"></p>
         </div>
         <div class="element-side right padding offer-side">
-          <a routerLink="/organisationen/{{organisation.id}}" class="btn btn-primary">Details</a>
+          <a
+            routerLink="/organisationen/{{ organisation.id }}"
+            class="btn btn-primary"
+            >Details</a
+          >
         </div>
       </div>
       <div class="buttons" *ngIf="organisations?.length > 0">
         <div class="buttons-left">
-          <button type="button" class="btn btn-secondary" [disabled]="page === 1" (click)="previousPage()">Vorherige
-            Seite</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            [disabled]="page === 1"
+            (click)="previousPage()"
+          >
+            Vorherige Seite
+          </button>
         </div>
-        <span>Seite {{page}} von {{totalPages}}</span>
+        <span>Seite {{ page }} von {{ totalPages }}</span>
         <div class="buttons-right">
-          <button type="button" class="btn btn-secondary" [disabled]="page === totalPages" (click)="nextPage()">Nächste
-            Seite</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            [disabled]="page === totalPages"
+            (click)="nextPage()"
+          >
+            Nächste Seite
+          </button>
         </div>
       </div>
     </div>

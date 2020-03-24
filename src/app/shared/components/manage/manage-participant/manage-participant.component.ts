@@ -4,8 +4,8 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output
-  } from '@angular/core';
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ParticipantState } from '@app/shared/enums/participantState';
 import { Ad } from '@app/shared/models/ad';
@@ -19,10 +19,9 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'fwas-manage-participant',
   templateUrl: './manage-participant.component.html',
-  styleUrls: ['./manage-participant.component.scss']
+  styleUrls: ['./manage-participant.component.scss'],
 })
 export class ManageParticipantComponent implements OnInit, OnChanges {
-
   @Input()
   participant: Participant;
   @Input()
@@ -33,8 +32,8 @@ export class ManageParticipantComponent implements OnInit, OnChanges {
   changedParticipant = new EventEmitter();
 
   participantForm: FormGroup;
-  status = Object.keys(ParticipantState).map(key => {
-    return { 'value': key, 'label': ParticipantState[key] };
+  status = Object.keys(ParticipantState).map((key) => {
+    return { value: key, label: ParticipantState[key] };
   });
   skillItems = [];
 
@@ -49,7 +48,7 @@ export class ManageParticipantComponent implements OnInit, OnChanges {
     private _participant: ParticipantService,
     private toastr: ToastrService,
     private _form: FormService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -69,7 +68,7 @@ export class ManageParticipantComponent implements OnInit, OnChanges {
       status: [this.participant.status, [Validators.required]],
       // TODO: skill validator
       skills: [this.participant.skills, [Validators.required]],
-      annotation: [this.participant.annotation, [Validators.maxLength(500)]]
+      annotation: [this.participant.annotation, [Validators.maxLength(500)]],
     });
   }
 
@@ -82,16 +81,21 @@ export class ManageParticipantComponent implements OnInit, OnChanges {
       this.sureDelete = true;
     } else {
       this.deleted = true;
-      this._participant.delete(this.participant)
-        .finally(() => this.deleted = false)
+      this._participant
+        .delete(this.participant)
+        .finally(() => (this.deleted = false))
         .subscribe(
-          data => {
+          (data) => {
             this.participant.deleted = true;
             this.changedParticipant.emit(this.participant);
             this.toastr.success('Die Person wurde erfolgreich gelöscht.');
           },
-          error => {
-            this.toastr.error('Die Person konnte nicht gelöscht werden.', 'Fehler', { timeOut: 0 });
+          (error) => {
+            this.toastr.error(
+              'Die Person konnte nicht gelöscht werden.',
+              'Fehler',
+              { timeOut: 0 }
+            );
           }
         );
     }
@@ -106,27 +110,39 @@ export class ManageParticipantComponent implements OnInit, OnChanges {
       const participantToSave: Participant = this.participantForm.value;
 
       if (participantToSave.id) {
-        participantToSave.skills = this.mapSkills(this.participantForm.value.skills);
+        participantToSave.skills = this.mapSkills(
+          this.participantForm.value.skills
+        );
 
-        this._participant.update(participantToSave)
-          .finally(() => this.submitted = false)
+        this._participant
+          .update(participantToSave)
+          .finally(() => (this.submitted = false))
           .subscribe(
-            data => {
+            (data) => {
               this.postSave(data);
             },
-            err => {
-              this.toastr.error('Die Person konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
+            (err) => {
+              this.toastr.error(
+                'Die Person konnte nicht gespeichert werden.',
+                'Fehler',
+                { timeOut: 0 }
+              );
             }
           );
       } else {
-        this._participant.save(participantToSave)
-          .finally(() => this.submitted = false)
+        this._participant
+          .save(participantToSave)
+          .finally(() => (this.submitted = false))
           .subscribe(
-            data => {
+            (data) => {
               this.postSave(data);
             },
-            err => {
-              this.toastr.error('Die Person konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
+            (err) => {
+              this.toastr.error(
+                'Die Person konnte nicht gespeichert werden.',
+                'Fehler',
+                { timeOut: 0 }
+              );
             }
           );
       }
@@ -151,7 +167,7 @@ export class ManageParticipantComponent implements OnInit, OnChanges {
   }
 
   private mapSkills(skillValues: Array<string>): Array<Skill> {
-    return skillValues.map(s => {
+    return skillValues.map((s) => {
       const skill = new Skill();
       skill.description = s['description'];
       return skill;

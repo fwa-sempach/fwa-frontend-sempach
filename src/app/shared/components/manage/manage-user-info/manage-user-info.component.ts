@@ -1,16 +1,11 @@
 import { Token } from '@angular/compiler';
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit
-  } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators
-  } from '@angular/forms';
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '@app/shared/services/auth/auth.service';
 import { FormService } from '@app/shared/services/form/form.service';
 import { UserService } from '@app/shared/services/user/user.service';
@@ -19,10 +14,9 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'fwas-manage-user-info',
   templateUrl: './manage-user-info.component.html',
-  styleUrls: ['./manage-user-info.component.scss']
+  styleUrls: ['./manage-user-info.component.scss'],
 })
 export class ManageUserInfoComponent implements OnInit, OnChanges {
-
   @Input()
   onlyPasswordReset = false;
   @Input()
@@ -43,27 +37,26 @@ export class ManageUserInfoComponent implements OnInit, OnChanges {
     private _user: UserService,
     private _auth: AuthService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.createEmailForm();
     this.createPasswordForm();
   }
 
-  ngOnChanges() {
-
-  }
+  ngOnChanges() {}
 
   createEmailForm() {
     this.emailForm = this.fb.group(
       {
         username: [this._auth.getUsername()],
         email: ['', [Validators.required, Validators.email]],
-        emailRepeat: ['', [Validators.required]]
+        emailRepeat: ['', [Validators.required]],
       },
       {
-        validator: emailMatcher
-      });
+        validator: emailMatcher,
+      }
+    );
   }
 
   createPasswordForm() {
@@ -71,11 +64,12 @@ export class ManageUserInfoComponent implements OnInit, OnChanges {
       {
         username: [this._auth.getUsername()],
         password: ['', [Validators.required, Validators.minLength(8)]],
-        passwordRepeat: ['', [Validators.required]]
+        passwordRepeat: ['', [Validators.required]],
       },
       {
-        validator: passwordMatcher
-      });
+        validator: passwordMatcher,
+      }
+    );
   }
 
   get fE() {
@@ -95,14 +89,21 @@ export class ManageUserInfoComponent implements OnInit, OnChanges {
       const credentials = this.emailForm.value;
       delete credentials['emailRepeat'];
 
-      this._user.changePassword(credentials)
-        .finally(() => this.emailSubmitted = false)
+      this._user
+        .changePassword(credentials)
+        .finally(() => (this.emailSubmitted = false))
         .subscribe(
-          data => {
-            this.toastr.success('Die Emailadresse wurde geändert und ist ab sofort gültig.');
+          (data) => {
+            this.toastr.success(
+              'Die Emailadresse wurde geändert und ist ab sofort gültig.'
+            );
           },
-          error => {
-            this.toastr.error('Die Emailadresse konnte nicht geändert werden.', 'Fehler', { timeOut: 0 });
+          (error) => {
+            this.toastr.error(
+              'Die Emailadresse konnte nicht geändert werden.',
+              'Fehler',
+              { timeOut: 0 }
+            );
           }
         );
     }
@@ -123,20 +124,27 @@ export class ManageUserInfoComponent implements OnInit, OnChanges {
         credentials.username = this._auth.getUsername();
       }
 
-      this._user.changePassword(credentials)
+      this._user
+        .changePassword(credentials)
         .finally(() => {
           this.passwordSubmitted = false;
         })
         .subscribe(
-          data => {
-            this.toastr.success('Das Passwort wurde geändert und ist ab sofort gültig.');
+          (data) => {
+            this.toastr.success(
+              'Das Passwort wurde geändert und ist ab sofort gültig.'
+            );
             if (this.resetToken) {
               this._auth.logout();
               this._auth.emitSession();
             }
           },
-          error => {
-            this.toastr.error('Das Passwort konnte nicht geändert werden.', 'Fehler', { timeOut: 0 });
+          (error) => {
+            this.toastr.error(
+              'Das Passwort konnte nicht geändert werden.',
+              'Fehler',
+              { timeOut: 0 }
+            );
           }
         );
     }

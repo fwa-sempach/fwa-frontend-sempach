@@ -5,7 +5,7 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ad } from '@app/shared/models/ad';
@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'fwas-candidature',
   templateUrl: './candidature.component.html',
-  styleUrls: ['./candidature.component.scss']
+  styleUrls: ['./candidature.component.scss'],
 })
 export class CandidatureComponent implements OnInit {
   @Input()
@@ -66,7 +66,7 @@ export class CandidatureComponent implements OnInit {
     this.candidatureForm = this.fb.group({
       skills: [''],
       annotation: ['', [Validators.maxLength(500)]],
-      recaptcha: ['', Validators.required]
+      recaptcha: ['', Validators.required],
     });
   }
 
@@ -95,7 +95,7 @@ export class CandidatureComponent implements OnInit {
         .save(participant, true)
         .finally(() => (this.submitted = false))
         .subscribe(
-          data => {
+          (data) => {
             this.toastr.remove(waitMessage.toastId);
             this.toastr.success(
               'Die Bewerbung wurde erfolgreich abgeschickt.' +
@@ -104,7 +104,7 @@ export class CandidatureComponent implements OnInit {
 
             this.formSubmitted.emit(participant);
           },
-          err => {
+          (err) => {
             this.toastr.error(
               'Hoppla. Da scheint etwas schief gegangen zu sein.' +
                 ' Bitte versuchen Sie es später noch einmal.',
@@ -118,7 +118,7 @@ export class CandidatureComponent implements OnInit {
 
   private mapSkills(skillValues: Array<string>): Array<Skill> {
     if (Array.isArray(skillValues)) {
-      return skillValues.map(s => {
+      return skillValues.map((s) => {
         const skill = new Skill();
         skill.description = s['description'];
         return skill;

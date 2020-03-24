@@ -5,11 +5,14 @@ import { NewOrganisationGuard } from './new-organisation.guard';
 describe('NewOrganisationGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NewOrganisationGuard]
+      providers: [NewOrganisationGuard],
     });
   });
 
-  it('should ...', inject([NewOrganisationGuard], (guard: NewOrganisationGuard) => {
-    expect(guard).toBeTruthy();
-  }));
+  it('should ...', inject(
+    [NewOrganisationGuard],
+    (guard: NewOrganisationGuard) => {
+      expect(guard).toBeTruthy();
+    }
+  ));
 });

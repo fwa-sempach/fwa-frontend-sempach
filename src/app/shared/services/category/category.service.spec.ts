@@ -5,11 +5,14 @@ import { CategoryService } from './category.service';
 describe('CategoryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CategoryService]
+      providers: [CategoryService],
     });
   });
 
-  it('should be created', inject([CategoryService], (service: CategoryService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [CategoryService],
+    (service: CategoryService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

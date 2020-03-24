@@ -5,13 +5,10 @@ import { OrganisationService } from '@app/shared/services/organisation/organisat
 @Component({
   selector: 'fwas-organisations',
   templateUrl: './organisations.component.html',
-  styleUrls: ['./organisations.component.scss']
+  styleUrls: ['./organisations.component.scss'],
 })
 export class OrganisationsComponent implements OnInit {
-
-  constructor(
-    private _organisations: OrganisationService
-  ) { }
+  constructor(private _organisations: OrganisationService) {}
 
   isError = false;
 
@@ -35,12 +32,12 @@ export class OrganisationsComponent implements OnInit {
 
   private readOrganisations(pageNumber: number) {
     this._organisations.readFiltered(pageNumber, this.pageSize).subscribe(
-      data => {
+      (data) => {
         this.organisations = data.elements;
         this.page = pageNumber;
         this.totalPages = Math.ceil(data.totalCount / this.pageSize);
       },
-      error => {
+      (error) => {
         this.isError = true;
       }
     );

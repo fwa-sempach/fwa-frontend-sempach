@@ -5,7 +5,7 @@ import { FormService } from './form.service';
 describe('FormService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FormService]
+      providers: [FormService],
     });
   });
 

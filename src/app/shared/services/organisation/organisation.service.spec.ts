@@ -5,11 +5,14 @@ import { OrganisationService } from './organisation.service';
 describe('OrganisationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [OrganisationService]
+      providers: [OrganisationService],
     });
   });
 
-  it('should be created', inject([OrganisationService], (service: OrganisationService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [OrganisationService],
+    (service: OrganisationService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

@@ -16,7 +16,7 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'fwas-manage-organisation',
   templateUrl: './manage-organisation.component.html',
-  styleUrls: ['./manage-organisation.component.scss']
+  styleUrls: ['./manage-organisation.component.scss'],
 })
 export class ManageOrganisationComponent implements OnInit {
   organisation: Organisation;
@@ -39,7 +39,7 @@ export class ManageOrganisationComponent implements OnInit {
     private _ad: AdService,
     private _participant: ParticipantService,
     private _auth: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.isAdmin = this._auth.hasRole('ADMIN');
@@ -48,27 +48,39 @@ export class ManageOrganisationComponent implements OnInit {
       const organisationId = +params.get('id');
 
       const organisationObs = this._organisation.readById(organisationId);
-      const offerObs = this._offer.readFiltered([], [organisationId], 1, 1000000);
+      const offerObs = this._offer.readFiltered(
+        [],
+        [organisationId],
+        1,
+        1000000
+      );
       const adObs = this._ad.readFiltered([], [organisationId], 1, 1000000);
-      const participantObs = this._participant.readFiltered(organisationId, [], [], 1, 1000000);
+      const participantObs = this._participant.readFiltered(
+        organisationId,
+        [],
+        [],
+        1,
+        1000000
+      );
 
-      forkJoin([organisationObs, offerObs, adObs, participantObs]).subscribe(results => {
-        this.organisation = results[0];
-        this.offers = <Array<Offer>>results[1].elements;
-        this.ads = <Array<Ad>>results[2].elements;
-        this.participants = <Array<Participant>>results[3].elements;
-      });
+      forkJoin([organisationObs, offerObs, adObs, participantObs]).subscribe(
+        (results) => {
+          this.organisation = results[0];
+          this.offers = <Array<Offer>>results[1].elements;
+          this.ads = <Array<Ad>>results[2].elements;
+          this.participants = <Array<Participant>>results[3].elements;
+        }
+      );
     });
   }
 
   adTitle(adId: number) {
-    return this.ads.filter(ad => ad.id === adId).map(ad => ad.title)[0];
+    return this.ads.filter((ad) => ad.id === adId).map((ad) => ad.title)[0];
   }
 
   statusText(status: string) {
     return ParticipantState[status];
   }
-
 
   addOffer() {
     const newOffer = new Offer();
@@ -79,11 +91,9 @@ export class ManageOrganisationComponent implements OnInit {
   }
 
   editOffer(offerId: number) {
-    this._offer.readById(offerId).subscribe(
-      data => {
-        this.setCurrentOffer(data);
-      }
-    );
+    this._offer.readById(offerId).subscribe((data) => {
+      this.setCurrentOffer(data);
+    });
   }
 
   cancelOfferEditing($event) {
@@ -92,13 +102,13 @@ export class ManageOrganisationComponent implements OnInit {
 
   changedOffer($event) {
     const offer: Offer = $event;
-    const offers = this.offers.filter(o => o.id !== offer.id);
+    const offers = this.offers.filter((o) => o.id !== offer.id);
     if (!offer.deleted) {
       offers.push(offer);
     } else {
       this.currentOffer = null;
     }
-    this.offers = offers.sort((a, b) => a.title > b.title ? -1 : 1);
+    this.offers = offers.sort((a, b) => (a.title > b.title ? -1 : 1));
   }
 
   private setCurrentOffer(offer: Offer) {
@@ -125,11 +135,9 @@ export class ManageOrganisationComponent implements OnInit {
   }
 
   editAd(adId: number) {
-    this._ad.readById(adId).subscribe(
-      data => {
-        this.setCurrentAd(data);
-      }
-    );
+    this._ad.readById(adId).subscribe((data) => {
+      this.setCurrentAd(data);
+    });
   }
 
   cancelAdEditing($event) {
@@ -138,13 +146,13 @@ export class ManageOrganisationComponent implements OnInit {
 
   changedAd($event) {
     const ad: Ad = $event;
-    const ads = this.ads.filter(o => o.id !== ad.id);
+    const ads = this.ads.filter((o) => o.id !== ad.id);
     if (!ad.deleted) {
       ads.push(ad);
     } else {
       this.currentAd = null;
     }
-    this.ads = ads.sort((a, b) => a.title > b.title ? -1 : 1);
+    this.ads = ads.sort((a, b) => (a.title > b.title ? -1 : 1));
   }
 
   private setCurrentAd(ad: Ad) {
@@ -162,11 +170,11 @@ export class ManageOrganisationComponent implements OnInit {
   }
 
   editParticipant(participantId: number) {
-    this._participant.readById(participantId, this.organisation.id).subscribe(
-      data => {
+    this._participant
+      .readById(participantId, this.organisation.id)
+      .subscribe((data) => {
         this.setCurrentParticipant(data);
-      }
-    );
+      });
   }
 
   cancelParticipantEditing($event) {
@@ -175,17 +183,25 @@ export class ManageOrganisationComponent implements OnInit {
 
   changedParticipant($event) {
     const participant: Participant = $event;
-    const participants = this.participants.filter(o => o.id !== participant.id);
+    const participants = this.participants.filter(
+      (o) => o.id !== participant.id
+    );
     if (!participant.deleted) {
       participants.push(participant);
     } else {
       this.currentParticipant = null;
     }
-    this.participants = participants.sort((a, b) => a.person.firstname > b.person.firstname ? -1 : 1);
+    this.participants = participants.sort((a, b) =>
+      a.person.firstname > b.person.firstname ? -1 : 1
+    );
   }
 
   private setCurrentParticipant(participant: Participant) {
-    if (participant && this.currentParticipant && participant.id === this.currentParticipant.id) {
+    if (
+      participant &&
+      this.currentParticipant &&
+      participant.id === this.currentParticipant.id
+    ) {
       this.currentParticipant = null;
     } else {
       this.currentParticipant = participant;

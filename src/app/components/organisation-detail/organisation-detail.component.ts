@@ -6,10 +6,9 @@ import { OrganisationService } from '@app/shared/services/organisation/organisat
 @Component({
   selector: 'fwas-organisation-detail',
   templateUrl: './organisation-detail.component.html',
-  styleUrls: ['./organisation-detail.component.scss']
+  styleUrls: ['./organisation-detail.component.scss'],
 })
 export class OrganisationDetailComponent implements OnInit {
-
   isError = false;
   notFound = false;
 
@@ -17,16 +16,17 @@ export class OrganisationDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private _organisation: OrganisationService) { }
+    private _organisation: OrganisationService
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const organisationId = params.get('id');
       this._organisation.readById(+organisationId).subscribe(
-        data => {
+        (data) => {
           this.organisation = data;
         },
-        error => {
+        (error) => {
           this.isError = true;
           if (error.status === 404) {
             this.notFound = true;
@@ -35,5 +35,4 @@ export class OrganisationDetailComponent implements OnInit {
       );
     });
   }
-
 }

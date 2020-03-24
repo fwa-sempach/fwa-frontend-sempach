@@ -7,10 +7,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
-
 @Injectable()
 export class AuthService {
-
   private jwt: JwtHelperService;
 
   private url = environment.apiUrl + '/auth';
@@ -24,7 +22,7 @@ export class AuthService {
   sessionEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient, private router: Router) {
-    this.jwt = new JwtHelperService;
+    this.jwt = new JwtHelperService();
   }
 
   private getTokenProperty(key: string) {
@@ -39,7 +37,7 @@ export class AuthService {
     this.session = {
       username: this.getTokenProperty('sub'),
       organisationId: this.getTokenProperty('orgId'),
-      roleCodes: this.getTokenProperty('roleCodes')
+      roleCodes: this.getTokenProperty('roleCodes'),
     };
 
     return this.session;
@@ -77,7 +75,7 @@ export class AuthService {
 
   public renew(): Observable<any> {
     const token = this.getToken();
-    const user = { 'token': token };
+    const user = { token: token };
     const postUrl = this.url + '/renew';
     return this.http.post<object>(postUrl, user);
   }

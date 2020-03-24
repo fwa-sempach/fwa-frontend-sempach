@@ -5,14 +5,12 @@ import { Offer } from '@app/shared/models/offer';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
-
 @Injectable()
 export class OfferService {
-
   private url = environment.apiUrl + '/offers';
   private defaultSort = '?_sort=title&_order=asc';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public readFiltered(
     categoryIds: Array<number>,
@@ -21,7 +19,13 @@ export class OfferService {
     pageSize: number,
     onlyActive: boolean = false
   ): Observable<InfoWrapper<Offer>> {
-    const queryUrl = this.generateFilterUrl(categoryIds, organisationIds, page, pageSize, onlyActive);
+    const queryUrl = this.generateFilterUrl(
+      categoryIds,
+      organisationIds,
+      page,
+      pageSize,
+      onlyActive
+    );
     return this.http.get<InfoWrapper<Offer>>(queryUrl);
   }
 

@@ -6,10 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'fwas-recover-password',
   templateUrl: './recover-password.component.html',
-  styleUrls: ['./recover-password.component.scss']
+  styleUrls: ['./recover-password.component.scss'],
 })
 export class RecoverPasswordComponent implements OnInit {
-
   token: string;
 
   constructor(
@@ -17,10 +16,10 @@ export class RecoverPasswordComponent implements OnInit {
     private _auth: AuthService,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       this.token = params['t'];
     });
   }

@@ -7,11 +7,11 @@ $navbar-height: 2.5rem;
 $grid-buttons-height: 4.18rem;
 $h-spacing: 1.875rem;
 // colors
-$red-light: #FF6464;
-$red-dark: #9B5A5A;
+$red-light: #ff6464;
+$red-dark: #9b5a5a;
 $white: #fff;
-$grey-very-light: #F5F5F5;
-$grey-light: #E3E3E3;
+$grey-very-light: #f5f5f5;
+$grey-light: #e3e3e3;
 $grey-medium: #707070;
 // fonts
 $font-family-base: Open Sans;
@@ -44,8 +44,7 @@ $enable-grid-classes: true;
 $enable-print-styles: true;
 // other customisations
 $primary: $red-light;
-$font-family-sans-serif: $font-family-base,
-$font-family-headings;
+$font-family-sans-serif: $font-family-base, $font-family-headings;
 $navbar-padding-y: 0;
 $grid-gutter-width: $h-spacing;
 $body-color: $base-font-color;

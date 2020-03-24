@@ -1,83 +1,83 @@
 .navbar {
-    padding: 0;
-    @media (min-width: 576px) {
-        padding: 0 $grid-gutter-width / 2;
+  padding: 0;
+  @media (min-width: 576px) {
+    padding: 0 $grid-gutter-width / 2;
+  }
+  & > .container {
+    background: $navbar-background;
+  }
+  .navbar-toggler {
+    &:hover {
+      background: $nav-item-hover-background;
+      color: $nav-item-hover-color !important;
     }
-    &>.container {
-        background: $navbar-background;
+    .navbar-toggler-icon {
+      background: $navbar-light-toggler-icon-bg;
     }
-    .navbar-toggler {
-        &:hover {
-            background: $nav-item-hover-background;
-            color: $nav-item-hover-color !important;
-        }
-        .navbar-toggler-icon {
-            background: $navbar-light-toggler-icon-bg;
-        }
+  }
+  .navbar-brand {
+    margin-left: $grid-gutter-width / 2;
+    @media (min-width: 992px) {
+      margin-left: 0;
     }
-    .navbar-brand {
-        margin-left: $grid-gutter-width / 2;
-        @media (min-width: 992px) {
-            margin-left: 0;
-        }
+  }
+  .navbar-collapse {
+    @media (min-width: 992px) {
+      margin-right: -$grid-gutter-width / 2;
     }
-    .navbar-collapse {
-        @media (min-width: 992px) {
-            margin-right: -$grid-gutter-width / 2;
-        }
+  }
+  .navbar-collapse {
+    flex-grow: 0;
+  }
+  .nav-item {
+    font-family: $font-family-navigation;
+    background: $nav-item-background;
+    &.active {
+      background: $nav-item-active-background;
+      a {
+        color: $nav-item-active-color !important;
+      }
     }
-    .navbar-collapse {
-        flex-grow: 0;
+    &:hover {
+      background: $nav-item-hover-background;
+      a {
+        color: $nav-item-hover-color !important;
+      }
     }
-    .nav-item {
-        font-family: $font-family-navigation;
-        background: $nav-item-background;
-        &.active {
-            background: $nav-item-active-background;
-            a {
-                color: $nav-item-active-color !important;
-            }
-        }
-        &:hover {
-            background: $nav-item-hover-background;
-            a {
-                color: $nav-item-hover-color !important;
-            }
-        }
-        a {
-            padding: $nav-item-a-padding !important;
-            color: $nav-item-color !important;
-        }
+    a {
+      padding: $nav-item-a-padding !important;
+      color: $nav-item-color !important;
     }
+  }
 }
 
 .nav-tabs {
-    margin: 0;
-    margin-bottom: $spacing * 2;
-    border-bottom: 1px solid $red-light;
-    @media (min-width: 768px) {
-        padding-left: $h-spacing;
+  margin: 0;
+  margin-bottom: $spacing * 2;
+  border-bottom: 1px solid $red-light;
+  @media (min-width: 768px) {
+    padding-left: $h-spacing;
+  }
+  .nav-item {
+    font-family: $font-family-headings;
+    padding: 0;
+    .nav-link {
+      background: none;
+      color: $red-dark;
+      &.active {
+        background: $red-light;
+        color: $white;
+      }
     }
-    .nav-item {
-        font-family: $font-family-headings;
-        padding: 0;
-        .nav-link {
-            background: none;
-            color: $red-dark;
-            &.active {
-                background: $red-light;
-                color: $white;
-            }
-        }
-        &:hover {
-            .nav-link {
-                background: $red-light;
-                color: $white;
-            }
-        }
+    &:hover {
+      .nav-link {
+        background: $red-light;
+        color: $white;
+      }
     }
+  }
 }
 
-input[type="checkbox"].form-control {
-    width: 16px;
+input[type='checkbox'].form-control {
+  width: 16px;
 }

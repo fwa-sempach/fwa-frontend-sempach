@@ -11,16 +11,32 @@
           <form [formGroup]="filterForm">
             <div class="form-group" formArrayName="categories">
               <label>Kategorie</label>
-              <div *ngFor="let category of categoryFormArray.controls; let i=index" [formGroupName]="i" class="form-check">
+              <div
+                *ngFor="
+                  let category of categoryFormArray.controls;
+                  let i = index
+                "
+                [formGroupName]="i"
+                class="form-check"
+              >
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" formControlName="selected">
-                  {{category.value.category.name}}
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    formControlName="selected"
+                  />
+                  {{ category.value.category.name }}
                 </label>
               </div>
             </div>
             <div class="form-group" [hidden]="isSingleOrganisation">
               <label>Organisation</label>
-              <ng-select [items]="organisations" bindLabel="name" bindValue="id" formControlName="organisations"></ng-select>
+              <ng-select
+                [items]="organisations"
+                bindLabel="name"
+                bindValue="id"
+                formControlName="organisations"
+              ></ng-select>
             </div>
           </form>
         </div>
@@ -29,33 +45,55 @@
     <div class="col-lg-8 loading-wrapper">
       <div *ngIf="ads?.length === 0" class="grid-element">
         <div class="element-content">
-          <h2 class="element-title">Es gibt keine Inserate, die mit den gewählten Kriterien übereinstimmen...</h2>
+          <h2 class="element-title">
+            Es gibt keine Inserate, die mit den gewählten Kriterien
+            übereinstimmen...
+          </h2>
         </div>
       </div>
       <div *ngFor="let ad of ads" class="grid-element offer">
         <div class="element-side left">
-          <div class="element-side-image" [ngStyle]="{ 'background-image': 'url(' + ad?.image?.imageUrl + ')'}"></div>
+          <div
+            class="element-side-image"
+            [ngStyle]="{
+              'background-image': 'url(' + ad?.image?.imageUrl + ')'
+            }"
+          ></div>
         </div>
         <div class="element-content">
-          <h2 class="element-title">{{ad.title}}</h2>
-          <p class="element-sub-title">{{ad.offer.organisation.name}}</p>
+          <h2 class="element-title">{{ ad.title }}</h2>
+          <p class="element-sub-title">{{ ad.offer.organisation.name }}</p>
           <p [innerHtml]="ad.offer.description"></p>
         </div>
         <div class="element-side right padding offer-side">
-          <p class="offer-category">{{ad.offer.category.name}}</p>
+          <p class="offer-category">{{ ad.offer.category.name }}</p>
           <!--<p class="offer-category">{{ad.offer.category.name}}</p>-->
-          <a routerLink="/inserate/{{ad.id}}" class="btn btn-primary">Details</a>
+          <a routerLink="/inserate/{{ ad.id }}" class="btn btn-primary"
+            >Details</a
+          >
         </div>
       </div>
       <div class="buttons" *ngIf="ads?.length > 0">
         <div class="buttons-left">
-          <button type="button" class="btn btn-secondary" [disabled]="page === 1" (click)="previousPage()">Vorherige
-            Seite</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            [disabled]="page === 1"
+            (click)="previousPage()"
+          >
+            Vorherige Seite
+          </button>
         </div>
-        <span>Seite {{page}} von {{totalPages}}</span>
+        <span>Seite {{ page }} von {{ totalPages }}</span>
         <div class="buttons-right">
-          <button type="button" class="btn btn-secondary" [disabled]="page === totalPages" (click)="nextPage()">Nächste
-            Seite</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            [disabled]="page === totalPages"
+            (click)="nextPage()"
+          >
+            Nächste Seite
+          </button>
         </div>
       </div>
     </div>

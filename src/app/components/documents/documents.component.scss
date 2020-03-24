@@ -1,14 +1,13 @@
 @import './src/styles';
 .document {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: $spacing / 2;
-    button {
-        align-self: baseline;
-    }
-    @media all and (-ms-high-contrast: none),
-    (-ms-high-contrast: active) {
-        /* IE10+ CSS styles go here */
-        margin-top: -21px;
-    }
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $spacing / 2;
+  button {
+    align-self: baseline;
+  }
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    /* IE10+ CSS styles go here */
+    margin-top: -21px;
+  }
 }

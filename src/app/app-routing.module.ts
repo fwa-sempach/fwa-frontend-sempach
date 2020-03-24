@@ -39,18 +39,26 @@ const routes: Routes = [
   {
     path: 'manage',
     children: [
-      { path: 'organisationen', component: CreateOrganisationComponent, canActivate: [NewOrganisationGuard] },
-      { path: 'organisationen/:id', component: ManageOrganisationComponent, canActivate: [OrganisationGuard] },
+      {
+        path: 'organisationen',
+        component: CreateOrganisationComponent,
+        canActivate: [NewOrganisationGuard],
+      },
+      {
+        path: 'organisationen/:id',
+        component: ManageOrganisationComponent,
+        canActivate: [OrganisationGuard],
+      },
       // { path: 'offer/:id', component: ManageOfferComponent, canActivate: [OrganisationGuard] }
-    ]
+    ],
   },
 
   { path: '', redirectTo: '/start', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

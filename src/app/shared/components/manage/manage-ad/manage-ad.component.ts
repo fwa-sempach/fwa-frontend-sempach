@@ -4,29 +4,31 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output
-  } from '@angular/core';
+  Output,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators
-  } from '@angular/forms';
+  Validators,
+} from '@angular/forms';
 import { Ad } from '@app/shared/models/ad';
 import { Offer } from '@app/shared/models/offer';
 import { Task } from '@app/shared/models/task';
 import { AdService } from '@app/shared/services/ad/ad.service';
 import { FormService } from '@app/shared/services/form/form.service';
-import { NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDateAdapter,
+  NgbDateNativeAdapter,
+} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'fwas-manage-ad',
   templateUrl: './manage-ad.component.html',
-  styleUrls: ['./manage-ad.component.scss']
+  styleUrls: ['./manage-ad.component.scss'],
 })
 export class ManageAdComponent implements OnInit, OnChanges {
-
   @Input()
   ad: Ad;
   @Input()
@@ -49,7 +51,7 @@ export class ManageAdComponent implements OnInit, OnChanges {
     private _ad: AdService,
     private toastr: ToastrService,
     private _form: FormService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -66,17 +68,20 @@ export class ManageAdComponent implements OnInit, OnChanges {
       {
         id: [this.ad.id],
         title: [this.ad.title, [Validators.required, Validators.maxLength(50)]],
-        numberOfVolunteersNeeded: [this.ad.numberOfVolunteersNeeded, [Validators.required, Validators.pattern(/^\d*$/)]],
+        numberOfVolunteersNeeded: [
+          this.ad.numberOfVolunteersNeeded,
+          [Validators.required, Validators.pattern(/^\d*$/)],
+        ],
         releaseDate: [new Date(this.ad.releaseDate), [Validators.required]],
         validUntil: [new Date(this.ad.validUntil), [Validators.required]],
         offer: [this.ad.offer, [Validators.required]],
         active: [this.ad.active],
         // todo: task, BC validator
         tasks: [this.ad.tasks, [Validators.required]],
-        basicConditions: [this.ad.basicConditions, [Validators.required]]
+        basicConditions: [this.ad.basicConditions, [Validators.required]],
       },
       {
-        validator: dateOrderChecker
+        validator: dateOrderChecker,
       }
     );
   }
@@ -90,16 +95,21 @@ export class ManageAdComponent implements OnInit, OnChanges {
       this.sureDelete = true;
     } else {
       this.deleted = true;
-      this._ad.delete(this.ad)
-        .finally(() => this.deleted = false)
+      this._ad
+        .delete(this.ad)
+        .finally(() => (this.deleted = false))
         .subscribe(
-          data => {
+          (data) => {
             this.ad.deleted = true;
             this.changedAd.emit(this.ad);
             this.toastr.success('Das Inserat wurde erfolgreich gelöscht.');
           },
-          error => {
-            this.toastr.error('Das Inserat konnte nicht gelöscht werden.', 'Fehler', { timeOut: 0 });
+          (error) => {
+            this.toastr.error(
+              'Das Inserat konnte nicht gelöscht werden.',
+              'Fehler',
+              { timeOut: 0 }
+            );
           }
         );
     }
@@ -116,23 +126,37 @@ export class ManageAdComponent implements OnInit, OnChanges {
       if (adToSave.id) {
         adToSave.image.id = this.ad.image.id;
 
-        this._ad.update(adToSave).finally(() => this.submitted = false).subscribe(
-          data => {
-            this.postSave(data);
-          },
-          err => {
-            this.toastr.error('Das Inserat konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
-          }
-        );
+        this._ad
+          .update(adToSave)
+          .finally(() => (this.submitted = false))
+          .subscribe(
+            (data) => {
+              this.postSave(data);
+            },
+            (err) => {
+              this.toastr.error(
+                'Das Inserat konnte nicht gespeichert werden.',
+                'Fehler',
+                { timeOut: 0 }
+              );
+            }
+          );
       } else {
-        this._ad.save(adToSave).finally(() => this.submitted = false).subscribe(
-          data => {
-            this.postSave(data);
-          },
-          err => {
-            this.toastr.error('Das Inserat konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
-          }
-        );
+        this._ad
+          .save(adToSave)
+          .finally(() => (this.submitted = false))
+          .subscribe(
+            (data) => {
+              this.postSave(data);
+            },
+            (err) => {
+              this.toastr.error(
+                'Das Inserat konnte nicht gespeichert werden.',
+                'Fehler',
+                { timeOut: 0 }
+              );
+            }
+          );
       }
     }
   }
@@ -165,7 +189,7 @@ export function dateOrderChecker(c: AbstractControl) {
     return null;
   }
 
-  if ((<Date>start.value) < (<Date>end.value)) {
+  if (<Date>start.value < <Date>end.value) {
     return null;
   } else {
     end.setErrors(error);
