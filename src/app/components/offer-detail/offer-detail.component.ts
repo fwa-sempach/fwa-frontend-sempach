@@ -8,10 +8,9 @@ import { OrganisationService } from '@app/shared/services/organisation/organisat
 @Component({
   selector: 'fwas-offer-detail',
   templateUrl: './offer-detail.component.html',
-  styleUrls: ['./offer-detail.component.scss']
+  styleUrls: ['./offer-detail.component.scss'],
 })
 export class OfferDetailComponent implements OnInit {
-
   isError = false;
   notFound = false;
 
@@ -22,17 +21,17 @@ export class OfferDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private _offer: OfferService,
     private _organisation: OrganisationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const offerId = params.get('id');
       this._offer.readById(+offerId).subscribe(
-        data => {
+        (data) => {
           this.offer = data;
           this.readOrganisation();
         },
-        error => {
+        (error) => {
           this.isError = true;
           if (error.status === 404) {
             this.notFound = true;
@@ -44,10 +43,10 @@ export class OfferDetailComponent implements OnInit {
 
   private readOrganisation() {
     this._organisation.readById(this.offer.organisation.id).subscribe(
-      data => {
+      (data) => {
         this.organisation = data;
       },
-      err => {
+      (err) => {
         this.isError = true;
       }
     );

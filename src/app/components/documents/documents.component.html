@@ -11,8 +11,14 @@
         <ul>
           <li *ngFor="let document of documents">
             <div class="document">
-              <span>{{document.filename}}</span>
-              <button type="button" class="btn btn-primary btn-sm" (click)="readDocumentContent(document.id)">Download</button>
+              <span>{{ document.filename }}</span>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                (click)="readDocumentContent(document.id)"
+              >
+                Download
+              </button>
             </div>
           </li>
         </ul>

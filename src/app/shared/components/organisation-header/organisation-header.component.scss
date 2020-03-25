@@ -1,15 +1,15 @@
 @import './src/styles';
 
-a{
-    color: $base-font-color;
+a {
+  color: $base-font-color;
 
-    &:hover{
-        color: $white;
-        text-decoration: none;
-        background: $red-light;
+  &:hover {
+    color: $white;
+    text-decoration: none;
+    background: $red-light;
 
-        h2{
-            border-color: $white;
-        }
-    }    
+    h2 {
+      border-color: $white;
+    }
+  }
 }

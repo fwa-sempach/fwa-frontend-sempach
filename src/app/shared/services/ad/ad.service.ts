@@ -7,11 +7,10 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AdService {
-
   private url = environment.apiUrl + '/jobads';
   private defaultSort = '?_sort=title&_order=asc';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public readFiltered(
     categoryIds: Array<number>,
@@ -20,7 +19,13 @@ export class AdService {
     pageSize: number,
     onlyActive: boolean = false
   ): Observable<InfoWrapper<Ad>> {
-    const queryUrl = this.generateFilterUrl(categoryIds, organisationIds, page, pageSize, onlyActive);
+    const queryUrl = this.generateFilterUrl(
+      categoryIds,
+      organisationIds,
+      page,
+      pageSize,
+      onlyActive
+    );
     return this.http.get<InfoWrapper<Ad>>(queryUrl);
   }
 

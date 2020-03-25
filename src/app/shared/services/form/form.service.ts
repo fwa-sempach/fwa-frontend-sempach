@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormService {
-
-  constructor() { }
-
+  constructor() {}
 
   public markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      if (control.controls) { // control is a FormGroup
+    (Object as any).values(formGroup.controls).forEach((control) => {
+      if (control.controls) {
+        // control is a FormGroup
         this.markFormGroupTouched(control);
-      } else { // control is a FormControl
+      } else {
+        // control is a FormControl
         control.markAsTouched();
       }
     });
@@ -24,7 +24,11 @@ export class FormService {
     return field.invalid && (field.dirty || field.touched);
   }
 
-  public getErrorMessage(fieldName: string, label: string, form: FormGroup): string {
+  public getErrorMessage(
+    fieldName: string,
+    label: string,
+    form: FormGroup
+  ): string {
     const field = form.get(fieldName);
     let message;
 
@@ -33,7 +37,10 @@ export class FormService {
         message = 'ist ein Pflichtfeld';
       }
       if (field.hasError('maxlength')) {
-        message = 'darf nicht länger als ' + field.errors.maxlength.requiredLength + ' Zeichen sein';
+        message =
+          'darf nicht länger als ' +
+          field.errors.maxlength.requiredLength +
+          ' Zeichen sein';
       }
       if (field.errors.email) {
         message = 'ist ungültig';

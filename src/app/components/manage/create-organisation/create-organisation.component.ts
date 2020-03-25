@@ -5,12 +5,10 @@ import { Organisation } from '@app/shared/models/organisation';
 @Component({
   selector: 'fwas-create-organisation',
   templateUrl: './create-organisation.component.html',
-  styleUrls: ['./create-organisation.component.scss']
+  styleUrls: ['./create-organisation.component.scss'],
 })
 export class CreateOrganisationComponent implements OnInit {
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

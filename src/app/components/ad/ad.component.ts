@@ -13,10 +13,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'fwas-ad',
   templateUrl: './ad.component.html',
-  styleUrls: ['./ad.component.scss']
+  styleUrls: ['./ad.component.scss'],
 })
 export class AdComponent implements OnInit {
-
   isError = false;
 
   @Input()
@@ -32,10 +31,12 @@ export class AdComponent implements OnInit {
   ads: Array<Ad>;
   filterForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private categoryService: CategoryService,
     private organisationService: OrganisationService,
-    private adService: AdService) { }
+    private adService: AdService
+  ) {}
 
   ngOnInit() {
     this.isSingleOrganisation = this.organisationId !== undefined;
@@ -48,12 +49,12 @@ export class AdComponent implements OnInit {
 
     // run multiple observables in parallel
     forkJoin([categoryObs, organisationObs]).subscribe(
-      results => {
+      (results) => {
         this.categories = results[0];
-        this.organisations = (<InfoWrapper<Organisation>>results[1]).elements;
+        this.organisations = (results[1] as InfoWrapper<Organisation>).elements;
         this.createForm();
       },
-      error => {
+      (error) => {
         this.isError = true;
       }
     );
@@ -72,55 +73,78 @@ export class AdComponent implements OnInit {
     if (this.isSingleOrganisation) {
       organisationIds = [this.organisationId];
     } else {
-      organisationIds = this.filterForm.value.organisations > 0 ? [this.filterForm.value.organisations] : [];
+      organisationIds =
+        this.filterForm.value.organisations > 0
+          ? [this.filterForm.value.organisations]
+          : [];
     }
 
-    const categoryIds = this.filterForm.value.categories.filter(c => c.selected).map(c => c.category.id);
+    const categoryIds = this.filterForm.value.categories
+      .filter((c) => c.selected)
+      .map((c) => c.category.id);
 
-    this.adService.readFiltered(categoryIds, organisationIds, pageNumber, this.pageSize, true).subscribe(
-      data => {
-        this.ads = data.elements;
-        this.page = pageNumber;
+    this.adService
+      .readFiltered(
+        categoryIds,
+        organisationIds,
+        pageNumber,
+        this.pageSize,
+        true
+      )
+      .subscribe(
+        (data) => {
+          this.ads = data.elements;
+          this.page = pageNumber;
 
-        this.totalPages = Math.ceil(data.totalCount / this.pageSize);
-      },
-      error => {
-        this.isError = true;
-      }
-    );
+          this.totalPages = Math.ceil(data.totalCount / this.pageSize);
+        },
+        (error) => {
+          this.isError = true;
+        }
+      );
   }
 
   private createForm() {
     this.organisations.unshift({
-      id: 0, name: 'Alle', userId: null, contactPerson: null,
-      websiteUrl: null, description: null, verified: null, deleted: null, image: null
+      id: 0,
+      name: 'Alle',
+      userId: null,
+      contactPerson: null,
+      websiteUrl: null,
+      description: null,
+      verified: null,
+      deleted: null,
+      image: null,
     });
 
     this.filterForm = this.fb.group({
       categories: this.createCategoryArray(),
-      organisations: 0
+      organisations: 0,
     });
 
-    this.filterForm.valueChanges.pipe(debounceTime(400), distinctUntilChanged()).subscribe(
-      f => {
-        this.readAds(1);
-      },
-      error => {
-        this.isError = true;
-      }
-    );
+    this.filterForm.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe(
+        (f) => {
+          this.readAds(1);
+        },
+        (error) => {
+          this.isError = true;
+        }
+      );
   }
 
   private createCategoryArray(): FormArray {
-    const categoryArray = this.categories.map(c => this.fb.group({
-      category: c,
-      selected: false
-    }));
+    const categoryArray = this.categories.map((c) =>
+      this.fb.group({
+        category: c,
+        selected: false,
+      })
+    );
     return this.fb.array(categoryArray);
   }
 
   get categoryFormArray(): FormArray {
     return this.filterForm.get('categories') as FormArray;
   }
-
 }

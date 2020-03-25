@@ -8,24 +8,39 @@
         <form [formGroup]="emailForm">
           <div class="form-group">
             <label for="">Email *</label>
-            <input type="text" class="form-control" formControlName="email">
-            <fwas-field-error-display [field]="fE['email']" [label]="'Email'" [trigger]="emailValidationTrigger"></fwas-field-error-display>
+            <input type="text" class="form-control" formControlName="email" />
+            <fwas-field-error-display
+              [field]="fE['email']"
+              [label]="'Email'"
+              [trigger]="emailValidationTrigger"
+            ></fwas-field-error-display>
           </div>
           <div class="form-group">
             <label for="">Email wiederholen *</label>
-            <input type="text" class="form-control" formControlName="emailRepeat">
-            <fwas-field-error-display [field]="fE['emailRepeat']" [label]="'Email wiederholen'" [trigger]="emailValidationTrigger"></fwas-field-error-display>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="emailRepeat"
+            />
+            <fwas-field-error-display
+              [field]="fE['emailRepeat']"
+              [label]="'Email wiederholen'"
+              [trigger]="emailValidationTrigger"
+            ></fwas-field-error-display>
           </div>
 
           <div class="buttons">
-            <div class="buttons-left">
-            </div>
+            <div class="buttons-left"></div>
             <div class="buttons-right">
-              <button class="btn btn-primary" (click)="changeEmail()" [disabled]="passwordSubmitted">Emailadresse
-                ändern</button>
+              <button
+                class="btn btn-primary"
+                (click)="changeEmail()"
+                [disabled]="passwordSubmitted"
+              >
+                Emailadresse ändern
+              </button>
             </div>
           </div>
-
         </form>
       </div>
     </div>
@@ -39,24 +54,43 @@
         <form [formGroup]="passwordForm">
           <div class="form-group">
             <label for="">Passwort *</label>
-            <input type="password" class="form-control" formControlName="password">
-            <fwas-field-error-display [field]="fP['password']" [label]="'Passwort'" [trigger]="passwordValidationTrigger"></fwas-field-error-display>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
+            <fwas-field-error-display
+              [field]="fP['password']"
+              [label]="'Passwort'"
+              [trigger]="passwordValidationTrigger"
+            ></fwas-field-error-display>
           </div>
           <div class="form-group">
             <label for="">Passwort wiederholen *</label>
-            <input type="password" class="form-control" formControlName="passwordRepeat">
-            <fwas-field-error-display [field]="fP['passwordRepeat']" [label]="'Passwort wiederholen'" [trigger]="passwordValidationTrigger"></fwas-field-error-display>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="passwordRepeat"
+            />
+            <fwas-field-error-display
+              [field]="fP['passwordRepeat']"
+              [label]="'Passwort wiederholen'"
+              [trigger]="passwordValidationTrigger"
+            ></fwas-field-error-display>
           </div>
 
           <div class="buttons">
-            <div class="buttons-left">
-            </div>
+            <div class="buttons-left"></div>
             <div class="buttons-right">
-              <button class="btn btn-primary" (click)="changePassword()" [disabled]="passwordSubmitted">Passwort
-                ändern</button>
+              <button
+                class="btn btn-primary"
+                (click)="changePassword()"
+                [disabled]="passwordSubmitted"
+              >
+                Passwort ändern
+              </button>
             </div>
           </div>
-
         </form>
       </div>
     </div>

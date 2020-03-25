@@ -4,8 +4,8 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output
-  } from '@angular/core';
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Organisation } from '@app/shared/models/organisation';
@@ -18,10 +18,9 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'fwas-manage-organisation-info',
   templateUrl: './manage-organisation-info.component.html',
-  styleUrls: ['./manage-organisation-info.component.scss']
+  styleUrls: ['./manage-organisation-info.component.scss'],
 })
 export class ManageOrganisationInfoComponent implements OnInit, OnChanges {
-
   @Input()
   organisation: Organisation;
   @Output()
@@ -49,7 +48,7 @@ export class ManageOrganisationInfoComponent implements OnInit, OnChanges {
     private router: Router,
     private _auth: AuthService,
     private _form: FormService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -68,13 +67,24 @@ export class ManageOrganisationInfoComponent implements OnInit, OnChanges {
 
     this.organisationForm = this.fb.group({
       id: [this.organisation.id],
-      name: [this.organisation.name, [Validators.required, Validators.maxLength(50)]],
-      websiteUrl: [url, [
-        Validators.required,
-        Validators.maxLength(90),
-        Validators.pattern(/^(https?:\/{2})?([\w-]*)+(\.[\w-]*)+[\/\w=\?\.\&]+$$/)
-      ]],
-      description: [this.organisation.description, [Validators.required, Validators.maxLength(1000)]]
+      name: [
+        this.organisation.name,
+        [Validators.required, Validators.maxLength(50)],
+      ],
+      websiteUrl: [
+        url,
+        [
+          Validators.required,
+          Validators.maxLength(90),
+          Validators.pattern(
+            /^(https?:\/{2})?([\w-]*)+(\.[\w-]*)+[\/\w=\?\.\&]+$$/
+          ),
+        ],
+      ],
+      description: [
+        this.organisation.description,
+        [Validators.required, Validators.maxLength(1000)],
+      ],
     });
   }
 
@@ -116,42 +126,54 @@ export class ManageOrganisationInfoComponent implements OnInit, OnChanges {
         organisationToSave.userId = this.organisation.userId;
         organisationToSave.image.id = this.organisation.image.id;
 
-        this._organisation.update(organisationToSave)
-          .finally(() => this.submitted = false)
+        this._organisation
+          .update(organisationToSave)
+          .finally(() => (this.submitted = false))
           .subscribe(
-            data => {
+            (data) => {
               this.postSave(data);
               this._auth.emitSession();
             },
-            err => {
-              this.toastr.error('Die Organisation konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
+            (err) => {
+              this.toastr.error(
+                'Die Organisation konnte nicht gespeichert werden.',
+                'Fehler',
+                { timeOut: 0 }
+              );
             }
           );
       } else {
         // insert
-        this._organisation.save(organisationToSave)
-          .subscribe(
-            data => {
-              this.postSave(data);
-              this._auth.renew()
-                .finally(() => this.submitted = false)
-                .subscribe(
-                  token => {
-                    localStorage.setItem('auth-token', token['token']);
-                    this._auth.emitSession();
-                    this.toastr.info(this.successText, '', { timeOut: 0, enableHtml: true });
-                    this.router.navigate(['manage', 'organisationen', data.id]);
-                  },
-                  err => {
-                    this.organisationCreated = true;
-                  }
-                );
-            },
-            err => {
-              this.submitted = false;
-              this.toastr.error('Die Organisation konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
-            }
-          );
+        this._organisation.save(organisationToSave).subscribe(
+          (data) => {
+            this.postSave(data);
+            this._auth
+              .renew()
+              .finally(() => (this.submitted = false))
+              .subscribe(
+                (token) => {
+                  localStorage.setItem('auth-token', token['token']);
+                  this._auth.emitSession();
+                  this.toastr.info(this.successText, '', {
+                    timeOut: 0,
+                    enableHtml: true,
+                  });
+                  this.router.navigate(['manage', 'organisationen', data.id]);
+                },
+                (err) => {
+                  this.organisationCreated = true;
+                }
+              );
+          },
+          (err) => {
+            this.submitted = false;
+            this.toastr.error(
+              'Die Organisation konnte nicht gespeichert werden.',
+              'Fehler',
+              { timeOut: 0 }
+            );
+          }
+        );
       }
     }
   }

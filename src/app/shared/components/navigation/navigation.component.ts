@@ -10,10 +10,9 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'fwas-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-
   apiurl = environment.apiUrl;
   isProd = environment.production;
 
@@ -30,9 +29,7 @@ export class NavigationComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private organisationService: OrganisationService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.readSession();
@@ -40,11 +37,9 @@ export class NavigationComponent implements OnInit {
   }
 
   private readSession() {
-    this.auth.sessionEmitter.subscribe(
-      data => {
-        this.parseSession(<Session>data);
-      }
-    );
+    this.auth.sessionEmitter.subscribe((data) => {
+      this.parseSession(data as Session);
+    });
   }
 
   private parseSession(session: Session) {
@@ -55,11 +50,11 @@ export class NavigationComponent implements OnInit {
 
       if (session.organisationId) {
         this.organisationService.readById(session.organisationId).subscribe(
-          organisation => {
+          (organisation) => {
             this.organisation = organisation;
             this.showOrganisation = true;
           },
-          err => {
+          (err) => {
             this.showOrganisation = false;
           }
         );
@@ -80,5 +75,4 @@ export class NavigationComponent implements OnInit {
   public invertCollapsation() {
     this.collapsed = !this.collapsed;
   }
-
 }

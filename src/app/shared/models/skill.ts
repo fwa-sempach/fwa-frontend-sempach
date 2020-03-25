@@ -1,5 +1,5 @@
 export class Skill {
-    id: number;
-    description: string;
-    deleted: boolean;
+  id: number;
+  description: string;
+  deleted: boolean;
 }

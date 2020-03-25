@@ -4,8 +4,8 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output
-  } from '@angular/core';
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from '@app/shared/models/category';
 import { Offer } from '@app/shared/models/offer';
@@ -21,10 +21,9 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'fwas-manage-offer',
   templateUrl: './manage-offer.component.html',
-  styleUrls: ['./manage-offer.component.scss']
+  styleUrls: ['./manage-offer.component.scss'],
 })
 export class ManageOfferComponent implements OnInit, OnChanges {
-
   @Input()
   offer: Offer;
   @Input()
@@ -50,12 +49,12 @@ export class ManageOfferComponent implements OnInit, OnChanges {
     private _offer: OfferService,
     private toastr: ToastrService,
     private _form: FormService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const categoryObs = this._category.readAll();
 
-    forkJoin([categoryObs]).subscribe(results => {
+    forkJoin([categoryObs]).subscribe((results) => {
       this.categories = results[0];
     });
 
@@ -71,15 +70,21 @@ export class ManageOfferComponent implements OnInit, OnChanges {
   private createForm() {
     this.offerForm = this.fb.group({
       id: [this.offer.id],
-      title: [this.offer.title, [Validators.required, Validators.maxLength(50)]],
-      description: [this.offer.description, [Validators.required, Validators.maxLength(1000)]],
+      title: [
+        this.offer.title,
+        [Validators.required, Validators.maxLength(50)],
+      ],
+      description: [
+        this.offer.description,
+        [Validators.required, Validators.maxLength(1000)],
+      ],
       organisation: this.fb.group({
-        id: [this.getOrganisationId()]
+        id: [this.getOrganisationId()],
       }),
       category: this.fb.group({
-        id: [this.getCategoryId(), [Validators.required]]
+        id: [this.getCategoryId(), [Validators.required]],
       }),
-      active: [this.offer.active]
+      active: [this.offer.active],
     });
   }
 
@@ -98,16 +103,21 @@ export class ManageOfferComponent implements OnInit, OnChanges {
       this.sureDelete = true;
     } else {
       this.deleted = true;
-      this._offer.delete(this.offer)
-        .finally(() => this.deleted = false)
+      this._offer
+        .delete(this.offer)
+        .finally(() => (this.deleted = false))
         .subscribe(
-          data => {
+          (data) => {
             this.offer.deleted = true;
             this.changedOffer.emit(this.offer);
             this.toastr.success('Das Angebot wurde erfolgreich gelöscht.');
           },
-          error => {
-            this.toastr.error('Das Angebot konnte nicht gelöscht werden.', 'Fehler', { timeOut: 0 });
+          (error) => {
+            this.toastr.error(
+              'Das Angebot konnte nicht gelöscht werden.',
+              'Fehler',
+              { timeOut: 0 }
+            );
           }
         );
     }
@@ -122,25 +132,35 @@ export class ManageOfferComponent implements OnInit, OnChanges {
       const offerToSave: Offer = this.offerForm.value;
 
       if (offerToSave.id) {
-        this._offer.update(offerToSave)
-          .finally(() => this.submitted = false)
+        this._offer
+          .update(offerToSave)
+          .finally(() => (this.submitted = false))
           .subscribe(
-            data => {
+            (data) => {
               this.postSave(data);
             },
-            err => {
-              this.toastr.error('Das Angebot konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
+            (err) => {
+              this.toastr.error(
+                'Das Angebot konnte nicht gespeichert werden.',
+                'Fehler',
+                { timeOut: 0 }
+              );
             }
           );
       } else {
-        this._offer.save(offerToSave)
-          .finally(() => this.submitted = false)
+        this._offer
+          .save(offerToSave)
+          .finally(() => (this.submitted = false))
           .subscribe(
-            data => {
+            (data) => {
               this.postSave(data);
             },
-            err => {
-              this.toastr.error('Das Angebot konnte nicht gespeichert werden.', 'Fehler', { timeOut: 0 });
+            (err) => {
+              this.toastr.error(
+                'Das Angebot konnte nicht gespeichert werden.',
+                'Fehler',
+                { timeOut: 0 }
+              );
             }
           );
       }

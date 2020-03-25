@@ -2,11 +2,16 @@
 <fwas-page-not-working *ngIf="isError && !notFound"></fwas-page-not-working>
 
 <div [hidden]="isError">
-  <div class="banner" [ngStyle]="{ 'background-image': 'url(' + offer?.image.imageUrl + ')'}"></div>
+  <div
+    class="banner"
+    [ngStyle]="{ 'background-image': 'url(' + offer?.image.imageUrl + ')' }"
+  ></div>
 
-  <h1>{{offer?.title}}</h1>
+  <h1>{{ offer?.title }}</h1>
 
-  <fwas-organisation-header [organisation]="organisation"></fwas-organisation-header>
+  <fwas-organisation-header
+    [organisation]="organisation"
+  ></fwas-organisation-header>
 
   <div class="row">
     <div class="col-lg-6">
@@ -31,7 +36,9 @@
     <div class="container">
       <div class="buttons">
         <div class="buttons-left">
-          <a routerLink="/angebote" class="btn btn-primary">Zurück zur Übersicht</a>
+          <a routerLink="/angebote" class="btn btn-primary"
+            >Zurück zur Übersicht</a
+          >
         </div>
         <div class="buttons-right"></div>
       </div>

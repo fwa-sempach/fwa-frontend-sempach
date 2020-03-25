@@ -6,13 +6,11 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
-
   private apiUrl = environment.apiUrl + '/config';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public readConfig(): Observable<Config> {
     return this.http.get<Config>(this.apiUrl);
   }
-
 }

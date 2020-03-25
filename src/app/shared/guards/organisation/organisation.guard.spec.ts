@@ -1,11 +1,11 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 
 import { OrganisationGuard } from './organisation.guard';
 
 describe('OrganisationGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [OrganisationGuard]
+      providers: [OrganisationGuard],
     });
   });
 

@@ -5,21 +5,21 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild
-} from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Ad } from "@app/shared/models/ad";
-import { Participant } from "@app/shared/models/participant";
-import { Skill } from "@app/shared/models/skill";
-import { FormService } from "@app/shared/services/form/form.service";
-import { ParticipantService } from "@app/shared/services/participant/participant.service";
-import { InvisibleReCaptchaComponent } from "ngx-captcha";
-import { ToastrService } from "ngx-toastr";
+  ViewChild,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Ad } from '@app/shared/models/ad';
+import { Participant } from '@app/shared/models/participant';
+import { Skill } from '@app/shared/models/skill';
+import { FormService } from '@app/shared/services/form/form.service';
+import { ParticipantService } from '@app/shared/services/participant/participant.service';
+import { InvisibleReCaptchaComponent } from 'ngx-captcha';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: "fwas-candidature",
-  templateUrl: "./candidature.component.html",
-  styleUrls: ["./candidature.component.scss"]
+  selector: 'fwas-candidature',
+  templateUrl: './candidature.component.html',
+  styleUrls: ['./candidature.component.scss'],
 })
 export class CandidatureComponent implements OnInit {
   @Input()
@@ -34,21 +34,21 @@ export class CandidatureComponent implements OnInit {
 
   validationTrigger = 0;
 
-  @ViewChild("captchaElem", { static: false })
+  @ViewChild('captchaElem', { static: false })
   captchaElem: InvisibleReCaptchaComponent;
 
-  public readonly siteKey = "6LdpgHUUAAAAAJQYPIiqXR20pyuagmTWLkCZkCYY";
+  public readonly siteKey = '6LdpgHUUAAAAAJQYPIiqXR20pyuagmTWLkCZkCYY';
   public captchaIsLoaded = false;
   public captchaSuccess = false;
   public captchaIsExpired = false;
   public captchaResponse?: string;
   public recaptcha: any = null;
-  public badge = "inline";
+  public badge = 'inline';
 
-  public theme = "light";
-  public size = "normal";
-  public lang = "de";
-  public type = "image";
+  public theme = 'light';
+  public size = 'normal';
+  public lang = 'de';
+  public type = 'image';
 
   constructor(
     private fb: FormBuilder,
@@ -64,9 +64,9 @@ export class CandidatureComponent implements OnInit {
 
   private createForm() {
     this.candidatureForm = this.fb.group({
-      skills: ["", Validators.required],
-      annotation: ["", [Validators.maxLength(500)]],
-      recaptcha: ["", Validators.required]
+      skills: [''],
+      annotation: ['', [Validators.maxLength(500)]],
+      recaptcha: ['', Validators.required],
     });
   }
 
@@ -80,8 +80,8 @@ export class CandidatureComponent implements OnInit {
 
     if (this.candidatureForm.valid) {
       const waitMessage = this.toastr.info(
-        "Die Bewerbung wird gesendet",
-        "Bitte warten...",
+        'Die Bewerbung wird gesendet',
+        'Bitte warten...',
         { timeOut: 0 }
       );
       const participant = new Participant();
@@ -95,20 +95,20 @@ export class CandidatureComponent implements OnInit {
         .save(participant, true)
         .finally(() => (this.submitted = false))
         .subscribe(
-          data => {
+          (data) => {
             this.toastr.remove(waitMessage.toastId);
             this.toastr.success(
-              "Die Bewerbung wurde erfolgreich abgeschickt." +
-                " Die Organisation wird sich zeitnah bei ihnen melden. Vielen Dank!"
+              'Die Bewerbung wurde erfolgreich abgeschickt.' +
+                ' Die Organisation wird sich zeitnah bei ihnen melden. Vielen Dank!'
             );
 
             this.formSubmitted.emit(participant);
           },
-          err => {
+          (err) => {
             this.toastr.error(
-              "Hoppla. Da scheint etwas schief gegangen zu sein." +
-                " Bitte versuchen Sie es später noch einmal.",
-              "Fehler",
+              'Hoppla. Da scheint etwas schief gegangen zu sein.' +
+                ' Bitte versuchen Sie es später noch einmal.',
+              'Fehler',
               { timeOut: 0 }
             );
           }
@@ -117,11 +117,15 @@ export class CandidatureComponent implements OnInit {
   }
 
   private mapSkills(skillValues: Array<string>): Array<Skill> {
-    return skillValues.map(s => {
-      const skill = new Skill();
-      skill.description = s["description"];
-      return skill;
-    });
+    if (Array.isArray(skillValues)) {
+      return skillValues.map((s) => {
+        const skill = new Skill();
+        skill.description = s['description'];
+        return skill;
+      });
+    }
+
+    return new Array<Skill>();
   }
 
   handleSuccess(captchaResponse: string): void {

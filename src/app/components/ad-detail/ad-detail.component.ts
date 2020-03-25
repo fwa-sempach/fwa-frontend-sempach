@@ -9,10 +9,9 @@ import { OrganisationService } from '@app/shared/services/organisation/organisat
 @Component({
   selector: 'fwas-ad-detail',
   templateUrl: './ad-detail.component.html',
-  styleUrls: ['./ad-detail.component.scss']
+  styleUrls: ['./ad-detail.component.scss'],
 })
 export class AdDetailComponent implements OnInit {
-
   isError = false;
   notFound = false;
   isFormVisible = false;
@@ -25,17 +24,17 @@ export class AdDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private _ad: AdService,
     private _organisation: OrganisationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const adId = params.get('id');
       this._ad.readById(+adId).subscribe(
-        data => {
+        (data) => {
           this.ad = data;
           this.readOrganisation();
         },
-        error => {
+        (error) => {
           this.isError = true;
           if (error.status === 404) {
             this.notFound = true;
@@ -47,10 +46,10 @@ export class AdDetailComponent implements OnInit {
 
   private readOrganisation() {
     this._organisation.readById(this.ad.offer.organisation.id).subscribe(
-      data => {
+      (data) => {
         this.organisation = data;
       },
-      error => {
+      (error) => {
         this.isError = true;
         if (error.status === 404) {
           this.notFound = true;

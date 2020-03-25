@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'fwas-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
   organisations = new Array<Organisation>();
@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
   }
 
   private readOrganisations() {
-    this._organisation.readFiltered(1, 100000, false).subscribe(data => {
+    this._organisation.readFiltered(1, 100000, false).subscribe((data) => {
       this.organisations = data.elements;
     });
   }
@@ -32,10 +32,10 @@ export class AdminComponent implements OnInit {
     organisation.verified = !organisation.verified;
 
     this._organisation.update(organisation, organisation.verified).subscribe(
-      data => {
+      (data) => {
         this.toastr.success('Die Organisation wurde erfolgreich gespeichert.');
       },
-      error => {
+      (error) => {
         this.toastr.error(
           'Die Organisation konnte nicht gespeichert werden.',
           'Fehler',
@@ -52,13 +52,13 @@ export class AdminComponent implements OnInit {
       this._organisation
         .delete(orgaisation)
         .subscribe(
-          data => {
+          (data) => {
             this.toastr.success('Die Organisation wurde erfolgreich gelöscht.');
             this.organisations = this.organisations.filter(
-              o => o.id !== orgaisation.id
+              (o) => o.id !== orgaisation.id
             );
           },
-          error => {
+          (error) => {
             this.toastr.error(
               'Die Organisation konnte nicht gelöscht werden.',
               'Fehler',

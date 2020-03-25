@@ -8,9 +8,8 @@ describe('FieldErrorDisplayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FieldErrorDisplayComponent ]
-    })
-    .compileComponents();
+      declarations: [FieldErrorDisplayComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

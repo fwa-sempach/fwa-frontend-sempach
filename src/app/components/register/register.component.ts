@@ -1,19 +1,19 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators
-} from "@angular/forms";
-import { FormService } from "@app/shared/services/form/form.service";
-import { UserService } from "@app/shared/services/user/user.service";
-import { InvisibleReCaptchaComponent } from "ngx-captcha";
-import { ToastrService } from "ngx-toastr";
+  Validators,
+} from '@angular/forms';
+import { FormService } from '@app/shared/services/form/form.service';
+import { UserService } from '@app/shared/services/user/user.service';
+import { InvisibleReCaptchaComponent } from 'ngx-captcha';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: "fwas-register",
-  templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.scss"]
+  selector: 'fwas-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   registrationSuccessful = false;
@@ -22,21 +22,21 @@ export class RegisterComponent implements OnInit {
 
   validationTrigger = 0;
 
-  @ViewChild("captchaElem", { static: false })
+  @ViewChild('captchaElem', { static: false })
   captchaElem: InvisibleReCaptchaComponent;
 
-  public readonly siteKey = "6LdpgHUUAAAAAJQYPIiqXR20pyuagmTWLkCZkCYY";
+  public readonly siteKey = '6LdpgHUUAAAAAJQYPIiqXR20pyuagmTWLkCZkCYY';
   public captchaIsLoaded = false;
   public captchaSuccess = false;
   public captchaIsExpired = false;
   public captchaResponse?: string;
   public recaptcha: any = null;
-  public badge = "inline";
+  public badge = 'inline';
 
-  public theme = "light";
-  public size = "normal";
-  public lang = "de";
-  public type = "image";
+  public theme = 'light';
+  public size = 'normal';
+  public lang = 'de';
+  public type = 'image';
 
   submitted = false;
 
@@ -56,20 +56,20 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group(
       {
         username: [
-          "",
+          '',
           [
             Validators.required,
             Validators.maxLength(50),
-            Validators.pattern(/^[\.\-_A-Za-z0-9]*$/)
-          ]
+            Validators.pattern(/^[\.\-_A-Za-z0-9]*$/),
+          ],
         ],
-        email: ["", [Validators.required, Validators.email]],
-        password: ["", [Validators.required, Validators.minLength(8)]],
-        passwordRepeat: ["", [Validators.required]],
-        recaptcha: ["", Validators.required]
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        passwordRepeat: ['', [Validators.required]],
+        recaptcha: ['', Validators.required],
       },
       {
-        validator: passwordMatcher
+        validator: passwordMatcher,
       }
     );
   }
@@ -83,8 +83,8 @@ export class RegisterComponent implements OnInit {
     this.validationTrigger++;
 
     if (this.registerForm.valid) {
-      delete this.registerForm.value["recaptcha"];
-      delete this.registerForm.value["passwordRepeat"];
+      delete this.registerForm.value['recaptcha'];
+      delete this.registerForm.value['passwordRepeat'];
 
       this.submitted = true;
       this._user
@@ -93,14 +93,14 @@ export class RegisterComponent implements OnInit {
           this.submitted = false;
         })
         .subscribe(
-          data => {
-            this.toastr.success("Registrierung erfolgreich");
+          (data) => {
+            this.toastr.success('Registrierung erfolgreich');
             this.email = this.registerForm.value.email;
             this.registrationSuccessful = true;
           },
-          error => {
-            this.toastr.error("Benutzername existiert bereits.", "Fehler", {
-              timeOut: 0
+          (error) => {
+            this.toastr.error('Benutzername existiert bereits.', 'Fehler', {
+              timeOut: 0,
             });
           }
         );
@@ -130,8 +130,8 @@ export class RegisterComponent implements OnInit {
 export function passwordMatcher(c: AbstractControl) {
   const error = { passwordMismatch: true };
 
-  const password = c.get("password");
-  const passwordRepeat = c.get("passwordRepeat");
+  const password = c.get('password');
+  const passwordRepeat = c.get('passwordRepeat');
 
   if (!password || !passwordRepeat) {
     return null;

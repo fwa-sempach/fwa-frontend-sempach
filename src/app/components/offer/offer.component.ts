@@ -4,8 +4,8 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
-  } from '@angular/forms';
+  Validators,
+} from '@angular/forms';
 import { Category } from '@app/shared/models/category';
 import { InfoWrapper } from '@app/shared/models/infoWrapper';
 import { Offer } from '@app/shared/models/offer';
@@ -19,10 +19,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'fwas-offer',
   templateUrl: './offer.component.html',
-  styleUrls: ['./offer.component.scss']
+  styleUrls: ['./offer.component.scss'],
 })
 export class OfferComponent implements OnInit {
-
   isError = false;
 
   @Input()
@@ -39,10 +38,12 @@ export class OfferComponent implements OnInit {
   offers: Array<Offer>;
   filterForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private categoryService: CategoryService,
     private organisationService: OrganisationService,
-    private offerService: OfferService) { }
+    private offerService: OfferService
+  ) {}
 
   ngOnInit() {
     this.isSingleOrganisation = this.organisationId !== undefined;
@@ -55,12 +56,12 @@ export class OfferComponent implements OnInit {
 
     // run multiple observables in parallel
     forkJoin([categoryObs, organisationObs]).subscribe(
-      results => {
+      (results) => {
         this.categories = results[0];
-        this.organisations = (<InfoWrapper<Organisation>>results[1]).elements;
+        this.organisations = (results[1] as InfoWrapper<Organisation>).elements;
         this.createForm();
       },
-      error => {
+      (error) => {
         this.isError = true;
       }
     );
@@ -79,55 +80,78 @@ export class OfferComponent implements OnInit {
     if (this.isSingleOrganisation) {
       organisationIds = [this.organisationId];
     } else {
-      organisationIds = this.filterForm.value.organisations > 0 ? [this.filterForm.value.organisations] : [];
+      organisationIds =
+        this.filterForm.value.organisations > 0
+          ? [this.filterForm.value.organisations]
+          : [];
     }
 
-    const categoryIds = this.filterForm.value.categories.filter(c => c.selected).map(c => c.category.id);
+    const categoryIds = this.filterForm.value.categories
+      .filter((c) => c.selected)
+      .map((c) => c.category.id);
 
-    this.offerService.readFiltered(categoryIds, organisationIds, pageNumber, this.pageSize, true).subscribe(
-      data => {
-        this.offers = data.elements;
-        this.page = pageNumber;
+    this.offerService
+      .readFiltered(
+        categoryIds,
+        organisationIds,
+        pageNumber,
+        this.pageSize,
+        true
+      )
+      .subscribe(
+        (data) => {
+          this.offers = data.elements;
+          this.page = pageNumber;
 
-        this.totalPages = Math.ceil(data.totalCount / this.pageSize);
-      },
-      error => {
-        this.isError = true;
-      }
-    );
+          this.totalPages = Math.ceil(data.totalCount / this.pageSize);
+        },
+        (error) => {
+          this.isError = true;
+        }
+      );
   }
 
   private createForm() {
     this.organisations.unshift({
-      id: 0, name: 'Alle', userId: null, contactPerson: null,
-      websiteUrl: null, description: null, verified: null, deleted: null, image: null
+      id: 0,
+      name: 'Alle',
+      userId: null,
+      contactPerson: null,
+      websiteUrl: null,
+      description: null,
+      verified: null,
+      deleted: null,
+      image: null,
     });
 
     this.filterForm = this.fb.group({
       categories: this.createCategoryArray(),
-      organisations: 0
+      organisations: 0,
     });
 
-    this.filterForm.valueChanges.pipe(debounceTime(400), distinctUntilChanged()).subscribe(
-      f => {
-        this.readOffers(1);
-      },
-      error => {
-        this.isError = true;
-      }
-    );
+    this.filterForm.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe(
+        (f) => {
+          this.readOffers(1);
+        },
+        (error) => {
+          this.isError = true;
+        }
+      );
   }
 
   createCategoryArray(): FormArray {
-    const categoryArray = this.categories.map(c => this.fb.group({
-      category: c,
-      selected: false
-    }));
+    const categoryArray = this.categories.map((c) =>
+      this.fb.group({
+        category: c,
+        selected: false,
+      })
+    );
     return this.fb.array(categoryArray);
   }
 
   get categoryFormArray(): FormArray {
     return this.filterForm.get('categories') as FormArray;
   }
-
 }
