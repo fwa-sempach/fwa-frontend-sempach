@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Publish Docker
-        uses: elgohr/Publish-Docker-Github-Action@2.9
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           # The name of the image you would like to push
           name: fwa-sempach/fwa-frontend-sempach/fwa-frontend-sempach:latest
